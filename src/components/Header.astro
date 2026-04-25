@@ -6,30 +6,27 @@ const navLinks = [
   },
   {
     line1: "Empresas",
-    href: "/empresas-mediaticas",
+    href: "/empresas",
   },
   {
     line1: "Consultoría",
-    href: "/proyectos-editoriales",
+    href: "/consultoria",
   },
   {
     line1: "Proyectos",
     href: "/proyectos-digitales",
+    disabled: true,
   },
   {
     line1: "Teorías",
-    href: "/inteligencia-de-negocios",
-  },
-  {
-    line1: "Inversionistas",
-    href: "/inversionistas",
+    href: "/teorias",
   },
 ];
 
 const pathname = Astro.url.pathname.replace(/\/$/, "");
 ---
 
-<header class="flex flex-row items-end justify-between pt-6">
+<header class="flex flex-row items-end justify-between pt-6 mb-4">
   <a href="/" class="inline-block">
     <img
       src="/uploads/2019/06/lgo_blanco_max.png"
@@ -42,8 +39,20 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       class="flex flex-wrap md:gap-x-8 gap-x-4 gap-y-3 text-sm uppercase tracking-wide mt-10"
     >
       {
-        navLinks.map(({ line1, href }) => {
+        navLinks.map(({ line1, href, disabled }) => {
           const active = pathname === href;
+          if (disabled) {
+            return (
+              <li>
+                <span
+                  aria-disabled="true"
+                  class="text-[12px] leading-[1.1] flex flex-col text-white font-extrabold cursor-not-allowed select-none"
+                >
+                  <span>{line1}</span>
+                </span>
+              </li>
+            );
+          }
           return (
             <li>
               <a

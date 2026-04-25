@@ -4,7 +4,7 @@ interface Props {
   alt?: string;
   interval?: number; // ms entre slides
   height?: string;   // tailwind arbitrary, ej. "h-[400px]"
-  fit?: "contain" | "cover";
+  fit?: "contain" | "cover" | "auto";
 }
 
 const {
@@ -15,13 +15,16 @@ const {
   fit = "contain",
 } = Astro.props;
 
-const objectFitClass = fit === "cover" ? "object-cover" : "object-contain";
+const objectFitClass =
+  fit === "cover" ? "object-cover" : fit === "auto" ? "object-contain" : "object-contain";
+const autoFit = fit === "auto";
 ---
 
-<section class="py-2">
+<section>
   <div
     class={`carousel relative w-full ${height} overflow-hidden`}
     data-interval={interval}
+    data-auto-fit={autoFit ? "true" : "false"}
   >
     <div class="carousel-track relative w-full h-full">
       {images.map((src, i) => (
@@ -54,6 +57,20 @@ const objectFitClass = fit === "cover" ? "object-cover" : "object-contain";
     const prev = root.querySelector<HTMLButtonElement>(".carousel-prev");
     const next = root.querySelector<HTMLButtonElement>(".carousel-next");
     const interval = Number(root.dataset.interval) || 4000;
+    const autoFit = root.dataset.autoFit === "true";
+
+    if (autoFit) {
+      const applyFit = (img: HTMLImageElement) => {
+        if (!img.naturalWidth || !img.naturalHeight) return;
+        const isLandscape = img.naturalWidth >= img.naturalHeight;
+        img.classList.toggle("object-cover", isLandscape);
+        img.classList.toggle("object-contain", !isLandscape);
+      };
+      slides.forEach((img) => {
+        if (img.complete) applyFit(img);
+        else img.addEventListener("load", () => applyFit(img), { once: true });
+      });
+    }
 
     if (slides.length <= 1) return;
 

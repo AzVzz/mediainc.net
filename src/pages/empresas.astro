@@ -3,17 +3,20 @@ import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/Carousel.astro";
 
 const mainBannerImages = [
-  "/uploads/2019/06/BANNERS_CAMBIOS_OK2_empresas.jpg",
-  "/uploads/2019/06/titulo_prueba.png",
   "/images/folio_premio.jpg",
-  "/images/Folio_banner1.jpg",
   "/images/residente_banner.jpg",
-  "/images/Residente_banner1.jpg",
-  "/images/Tempestad_banner1.jpg",
   "/images/trama_banner.jpg",
-  "/images/trama_banner_interior1.jpg",
   "/images/vocero_banner.jpg",
-  "/images/Vocero_banner1.jpg",
+
+
+  "/uploads/2014/04/vocero_banner1.png",
+  "/uploads/2014/05/voceroa_banner.jpg",
+  "/uploads/2014/10/FolioPrensa.jpg",
+  "/uploads/2014/10/LT.jpg",
+
+  "/uploads/2014/10/ResidenteMty.jpg",
+  "/uploads/2014/10/FolioVolumenBanner.jpg",
+  "/uploads/2015/01/LT-venecia.jpg",
 ];
 
 const cimientosImages = [
@@ -62,7 +65,6 @@ const voceroImages = [
   "/images/VOCERO_REVISTA_6_int_2.jpg",
   "/images/VOCERO_REVISTA_7_int_2.jpg",
   "/images/VOCERO_REVISTA_8_int_2.jpg",
-  "/images/VOCERO_REVISTA_8b_int_2.jpg",
   "/images/VOCERO_REVISTA_9_int_2.jpg",
   "/images/VOCERO_REVISTA_10_int_2.jpg",
   "/images/VOCERO_WEB_1_int_3.jpg",
@@ -137,150 +139,162 @@ const residenteImages = [
     images={mainBannerImages}
     alt="Empresas Mediáticas"
     height="h-[310px]"
+    fit="cover"
     interval={4500}
   />
 
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
-      <Carousel
-        images={cimientosImages}
-        alt="Cimientos"
-        height="h-[400px]"
-        fit="contain"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-2/5 flex flex-col">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Cimientos</h2>
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        Iniciativa enfocada en construir las bases editoriales y de negocio que sostienen a un medio en el tiempo.
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
-      <Carousel
-        images={folioImages}
-        alt="Folio"
-        height="h-[400px]"
-        fit="contain"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-2/5 flex flex-col">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Folio</h2>
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        Plataforma editorial líder enfocada en negocios, finanzas y liderazgo empresarial en México.
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
-      <Carousel
-        images={plataformaImages}
-        alt="Plataforma"
-        height="h-[400px]"
-        fit="contain"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-2/5 flex flex-col">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Plataforma</h2>
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        Plataforma editorial digital con contenido especializado y enfoque en audiencias de nicho.
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
-      <Carousel
-        images={residenteImages}
-        alt="Residente Ciudad"
-        height="h-[400px]"
-        fit="contain"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-2/5 flex flex-col">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Residente Ciudad</h2>
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        Revista impresa premium dedicada al estilo de vida, viajes y diseño en la Riviera Maya.
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
       <Carousel
         images={residenteFoodImages}
         alt="Residente Food&Drink Media"
-        height="h-[400px]"
-        fit="contain"
+        height="h-[280px]"
+        fit="auto"
         interval={4500}
       />
     </div>
-    <div class="md:w-2/5 flex items-center justify-center">
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
       <img
-        src="https://residente.mx/fotos/fotos-estaticas/componente-sin-carpetas/food-drink-media-logo-negro.png"
+        src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/Residente-FOOD-AND-DRINK-MEDIA.png"
         alt="Residente Food&Drink Media"
-        class="max-w-full h-auto invert"
+        class="w-90 h-auto"
       />
+      <time datetime="2015" class="mt-3 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2015 - 2030</time>
+      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
+        
+      </p>
     </div>
   </section>
 
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
+      <Carousel
+        images={cimientosImages}
+        alt="Cimientos"
+        height="h-[280px]"
+        fit="auto"
+        interval={4500}
+      />
+    </div>
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Cimientos</h2>
+      <time datetime="2018" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2018 - 2020</time>
+      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
+        
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
+      <Carousel
+        images={folioImages}
+        alt="Folio"
+        height="h-[280px]"
+        fit="auto"
+        interval={4500}
+      />
+    </div>
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Folio</h2>
+      <time datetime="2009" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2009 - 2017</time>
+      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
+        
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
       <Carousel
         images={tempestadImages}
         alt="La Tempestad"
-        height="h-[400px]"
-        fit="contain"
+        height="h-[280px]"
+        fit="auto"
         interval={4500}
       />
     </div>
-    <div class="md:w-2/5 flex flex-col">
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
       <h2 class="text-2xl font-bold uppercase tracking-wide text-white">La Tempestad</h2>
+      <time datetime="1998" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">1998 - 2017</time>
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        Revista cultural de referencia con cobertura en arte, diseño, arquitectura y tendencias.
+        
       </p>
     </div>
   </section>
 
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
-      <Carousel
-        images={tramaImages}
-        alt="Trama"
-        height="h-[400px]"
-        fit="contain"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-2/5 flex flex-col">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Trama</h2>
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        Publicación trimestral especializada en moda, cultura visual y nuevas narrativas.
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-8 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-3/5">
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
       <Carousel
         images={voceroImages}
         alt="Vocero"
-        height="h-[400px]"
-        fit="contain"
+        height="h-[280px]"
+        fit="auto"
         interval={4500}
       />
     </div>
-    <div class="md:w-2/5 flex flex-col">
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
       <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Vocero</h2>
+      <time datetime="2005" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2005 - 2017</time>
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        Periódico digital de análisis y opinión política con presencia nacional.
+        
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
+      <Carousel
+        images={tramaImages}
+        alt="Trama"
+        height="h-[280px]"
+        fit="auto"
+        interval={4500}
+      />
+    </div>
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Trama</h2>
+      <time datetime="2012" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2012 - 2015</time>
+      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
+        
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
+      <Carousel
+        images={plataformaImages}
+        alt="Plataforma"
+        height="h-[280px]"
+        fit="auto"
+        interval={4500}
+      />
+    </div>
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Plataforma</h2>
+      <time datetime="2009" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2009 - 2014</time>
+      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
+        
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+    <div class="w-full md:w-2/5">
+      <Carousel
+        images={residenteImages}
+        alt="Residente Ciudad"
+        height="h-[280px]"
+        fit="auto"
+        interval={4500}
+      />
+    </div>
+    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Residente Ciudad</h2>
+      <time datetime="2009" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2009 - 2014</time>
+      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
+        
       </p>
     </div>
   </section>

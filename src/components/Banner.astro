@@ -3,21 +3,23 @@ interface Props {
   title?: string;
   subtitle?: string;
   image?: string;
+  bordered?: boolean;
 }
 
 const {
   title,
   subtitle,
   image = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1080&h=400&fit=crop",
+  bordered = false,
 } = Astro.props;
 ---
 
-<section class="py-2">
-  <div class="relative w-full h-[310px] overflow-hidden">
+<section>
+  <div class={`relative w-full h-[310px] overflow-hidden ${bordered ? "border-2 border-white p-4" : ""}`}>
     <img
       src={image}
       alt={title ?? ""}
-      class="absolute inset-0 w-full h-full object-contain"
+      class="absolute inset-0 w-full h-full object-cover"
     />
     {(title || subtitle) && (
       <>
