@@ -4,6 +4,7 @@ interface Props {
   alt?: string;
   interval?: number; // ms entre slides
   height?: string;   // tailwind arbitrary, ej. "h-[400px]"
+  fit?: "contain" | "cover";
 }
 
 const {
@@ -11,7 +12,10 @@ const {
   alt = "",
   interval = 4000,
   height = "h-[400px]",
+  fit = "contain",
 } = Astro.props;
+
+const objectFitClass = fit === "cover" ? "object-cover" : "object-contain";
 ---
 
 <section class="py-2">
@@ -24,7 +28,7 @@ const {
         <img
           src={src}
           alt={alt}
-          class={`carousel-slide absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ease-in-out ${i === 0 ? "opacity-100" : "opacity-0"}`}
+          class={`carousel-slide absolute inset-0 w-full h-full ${objectFitClass} transition-opacity duration-700 ease-in-out ${i === 0 ? "opacity-100" : "opacity-0"}`}
           data-index={i}
           loading={i === 0 ? "eager" : "lazy"}
         />
@@ -41,24 +45,12 @@ const {
       class="carousel-next absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 text-white text-xl cursor-pointer transition-colors"
       aria-label="Siguiente"
     >›</button>
-
-    <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-      {images.map((_, i) => (
-        <button
-          type="button"
-          class={`carousel-dot w-2.5 h-2.5 rounded-full cursor-pointer transition-colors ${i === 0 ? "bg-white" : "bg-white/40 hover:bg-white/70"}`}
-          data-index={i}
-          aria-label={`Ir al slide ${i + 1}`}
-        ></button>
-      ))}
-    </div>
   </div>
 </section>
 
 <script>
   function initCarousel(root: HTMLElement) {
     const slides = Array.from(root.querySelectorAll<HTMLImageElement>(".carousel-slide"));
-    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>(".carousel-dot"));
     const prev = root.querySelector<HTMLButtonElement>(".carousel-prev");
     const next = root.querySelector<HTMLButtonElement>(".carousel-next");
     const interval = Number(root.dataset.interval) || 4000;
@@ -74,10 +66,6 @@ const {
         s.classList.toggle("opacity-100", idx === current);
         s.classList.toggle("opacity-0", idx !== current);
       });
-      dots.forEach((d, idx) => {
-        d.classList.toggle("bg-white", idx === current);
-        d.classList.toggle("bg-white/40", idx !== current);
-      });
     };
 
     const start = () => {
@@ -91,10 +79,6 @@ const {
 
     prev?.addEventListener("click", () => { show(current - 1); start(); });
     next?.addEventListener("click", () => { show(current + 1); start(); });
-    dots.forEach((d) => d.addEventListener("click", () => {
-      show(Number(d.dataset.index));
-      start();
-    }));
 
     root.addEventListener("mouseenter", stop);
     root.addEventListener("mouseleave", start);

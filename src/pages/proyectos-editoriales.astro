@@ -1,13 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Banner from "../components/Banner.astro";
+import Carousel from "../components/Carousel.astro";
 import ProjectList from "../components/ProjectList.astro";
 import { proyectosEditoriales } from "../data/projects";
+
+const consultoriaImages = [
+  "/uploads/2019/06/STAGE1-A.png",
+  "/uploads/2019/06/Strategic-Consultancy-1.png",
+];
 ---
 
 <Layout title="Proyectos Editoriales — Mediainc">
   <Banner
-    image="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&h=300&fit=crop"
+    image="/uploads/2019/06/Business-Strategy_consultoria.png"
   />
+
+  <div class="mt-6">
+    <img
+      src="/uploads/2019/06/Consultancy_OK_OK_Cambio.png"
+      alt="Consultancy"
+      class="w-full h-auto"
+    />
+  </div>
+
+  <Carousel
+    images={consultoriaImages}
+    alt="Consultoría"
+    height="h-[520px]"
+    fit="cover"
+    interval={4500}
+  />
+
   <ProjectList projects={proyectosEditoriales} />
 </Layout>
