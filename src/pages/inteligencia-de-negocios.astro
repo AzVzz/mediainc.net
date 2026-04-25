@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Carousel from "../components/Carousel.astro";
+import ProjectList from "../components/ProjectList.astro";
+import { inteligenciaNegocios } from "../data/projects";
+
+const teoriasImages = [
+  "/uploads/2019/06/BANNER1_teorias.jpg",
+  "/uploads/2019/06/BANNER2_teorias.png",
+];
+---
+
+<Layout title="Teorías — Mediainc">
+  <Carousel
+    images={teoriasImages}
+    alt="Teorías"
+    height="h-[310px]"
+    interval={4500}
+  />
+
+  <div class="mt-6 flex justify-start">
+    <img
+      src="/uploads/2019/06/BANNERS_CAMBIOS_INVESTORS_teorias.jpg"
+      alt="Cambios Investors"
+      class="w-2/5 h-auto"
+    />
+  </div>
+
+  <ProjectList projects={inteligenciaNegocios} />
+</Layout>

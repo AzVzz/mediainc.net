@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Banner from "../components/Banner.astro";
+import ProjectList from "../components/ProjectList.astro";
+import { proyectosEditoriales } from "../data/projects";
+---
+
+<Layout title="Proyectos Editoriales — Mediainc">
+  <Banner
+    image="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&h=300&fit=crop"
+  />
+  <ProjectList projects={proyectosEditoriales} />
+</Layout>

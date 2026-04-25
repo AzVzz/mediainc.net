@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
+
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Thin/Gotham%20Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Thin%20Italic/Gotham%20Thin%20Italic.otf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Extra%20Light/Gotham%20Extra%20Light.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Extra%20Light%20Italic/Gotham%20Extra%20Light%20Italic.otf") format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Light/Gotham%20Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Book/Gotham%20Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Italic/Gotham%20Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Medium/Gotham%20Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Bold/Gotham%20Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Bold%20Italic/Gotham%20Bold%20Italic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Black/Gotham%20Black.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/Gotham/Gotham%20Ultra/Gotham%20Ultra.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-bg: #1F1F1F;
+  --color-fg: #EDEDED;
+  --color-muted: #B5B5B5;
+  --font-sans: "Gotham", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html, body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
