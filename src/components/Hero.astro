@@ -1,26 +1,19 @@
 ---
-import Carousel from "./Carousel.astro";
-
-const heroImages = [
-  "/uploads/2019/06/BANNERS_CAMBIOS_OK2_empresas.jpg",
-  "/images/Folio_banner1.jpg",
-  "/images/Residente_banner1.jpg",
-  "/images/Tempestad_banner1.jpg",
-  "/images/trama_banner_interior1.jpg",
-  "/images/Vocero_banner1.jpg",
-];
+import Banner from "../components/Banner.astro";
 ---
 
 <section>
-  <Carousel
-    images={heroImages}
-    alt="Mediainc"
-    height="h-[310px]"
-    fit="cover"
-    interval={4500}
-  />
+  <Banner image="/uploads/2019/06/BANNERS_VISION.jpg" />
 
-  <div class="flex flex-col ml-auto mt-10 max-w-3xl font-medium max-w-[500px] text-justify font-['EB_Garamond']">
-    
+  <div class="flex flex-col ml-auto mt-10 font-medium font-['EB_Garamond']">
+    <h1 class="text-center text-[24px] mb-6">
+      Media Inc operates at the intersection of meaning and value.
+    </h1>
+    <section>
+      <p class="text-[65px] leading-[1] font-bold text-center">
+        A platform where ideas are developed, tested and applied across media,
+        projects and cultural analysis.
+      </p>
+    </section>
   </div>
 </section>

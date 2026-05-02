@@ -5,12 +5,19 @@ import ProjectList from "../components/ProjectList.astro";
 import { proyectosEditoriales } from "../data/projects";
 
 const consultoriaImages = [
-  "/uploads/2019/06/STAGE1-A.png",
-  "/uploads/2019/06/Strategic-Consultancy-1.png",
+  "/uploads/2019/06/BANNER1_teorias.jpg",
+  "/uploads/2019/06/BANNER2_teorias.png",
 ];
 ---
 
 <Layout title="Proyectos Editoriales — Mediainc">
+    <Carousel
+    images={consultoriaImages}
+    alt="Mediainc"
+    height="h-[310px]"
+    fit="cover"
+    interval={4500}
+  />
   <div class="mt-6">
     <img
       src="/uploads/2019/06/Consultancy_OK_OK_Cambio.png"

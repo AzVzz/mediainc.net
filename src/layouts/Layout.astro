@@ -7,6 +7,11 @@ interface Props {
 }
 
 const { title = "Mediainc" } = Astro.props;
+
+const secondaryLinks = [
+  { label: "About", href: "/nosotros" },
+  { label: "Contact", href: "/" },
+];
 ---
 
 <!doctype html>
@@ -15,10 +20,19 @@ const { title = "Mediainc" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
     <meta name="apple-mobile-web-app-title" content="MediaInc" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <title>{title}</title>
@@ -29,8 +43,26 @@ const { title = "Mediainc" } = Astro.props;
       <main>
         <slot />
       </main>
-      <footer class="border-t border-white/10 mt-16 py-8 text-sm text-[#B5B5B5]">
-        <p>&copy; {new Date().getFullYear()} Mediainc. Todos los derechos reservados.</p>
+      <footer
+        class="mt-8 py-8 text-sm text-[#B5B5B5]"
+      >
+        <ul class="flex justify-center border-b pb-5 border-white/10 gap-x-4 uppercase">
+          {
+            secondaryLinks.map(({ label, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class="text-[13px] leading-[1.1] flex flex-col transition-colors hover:underline font-extrabold text-white mx-2"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="pt-5">
+          &copy; {new Date().getFullYear()} Mediainc.
+        </p>
       </footer>
     </div>
   </body>

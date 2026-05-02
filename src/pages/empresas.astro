@@ -3,18 +3,22 @@ import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/Carousel.astro";
 
 const mainBannerImages = [
+  "/uploads/2019/06/BANNERS_CAMBIOS_OK2_empresas.jpg",
+  "/images/Folio_banner1.jpg",
+  "/images/Residente_banner1.jpg",
+  "/images/Tempestad_banner1.jpg",
+  "/images/trama_banner_interior1.jpg",
+  "/images/Vocero_banner1.jpg",
+
   "/images/folio_premio.jpg",
-  "/images/residente_banner.jpg",
   "/images/trama_banner.jpg",
   "/images/vocero_banner.jpg",
-
 
   "/uploads/2014/04/vocero_banner1.png",
   "/uploads/2014/05/voceroa_banner.jpg",
   "/uploads/2014/10/FolioPrensa.jpg",
   "/uploads/2014/10/LT.jpg",
 
-  "/uploads/2014/10/ResidenteMty.jpg",
   "/uploads/2014/10/FolioVolumenBanner.jpg",
   "/uploads/2015/01/LT-venecia.jpg",
 ];
@@ -99,39 +103,6 @@ const tempestadImages = [
   "/images/Tempestad_9_int_3.jpg",
   "/images/Tempestad_10_int_3.jpg",
 ];
-
-const residenteFoodImages = [
-  "/uploads/2019/06/RESIDENTE_mockup_fedro.jpg",
-  "/uploads/2019/06/RRW_Merch.jpg",
-  "/uploads/2019/06/RRW.png",
-  "/uploads/2019/06/RRM_Suplement_01.jpg",
-  "/uploads/2019/06/RRM_Suplement_02.jpg",
-  "/uploads/2019/06/RRW-01.jpg",
-  "/uploads/2019/06/RRW-02.jpg",
-];
-
-const residenteImages = [
-  "/images/RESIDENTE_rev_1_int_4.jpg",
-  "/images/RESIDENTE_rev_2_int_2.jpg",
-  "/images/RESIDENTE_rev_2_int_4.jpg",
-  "/images/RESIDENTE_rev_3_int_2.jpg",
-  "/images/RESIDENTE_rev_3_int_4.jpg",
-  "/images/RESIDENTE_rev_4_int_2.jpg",
-  "/images/RESIDENTE_rev_4_int_4.jpg",
-  "/images/RESIDENTE_rev_5_int_2.jpg",
-  "/images/RESIDENTE_rev_5_int_4.jpg",
-  "/images/RESIDENTE_rev_6_int_2.jpg",
-  "/images/RESIDENTE_rev_7_int_2.jpg",
-  "/images/RESIDENTE_rev_7_int_2b.jpg",
-  "/images/RESIDENTE_rev_8_int_2.jpg",
-  "/images/RESIDENTE_rev_8_int_2.png",
-  "/images/RESIDENTE_rev_9_int_2.jpg",
-  "/images/RESIDENTE_rev_10_int_2.jpg",
-  "/images/RESIDENTE_WEB_1_int_3.jpg",
-  "/images/RESIDENTE_WEB_2_int_3.jpg",
-  "/images/RESIDENTE_WEB_3_int_3.jpg",
-  "/images/RESIDENTE_WEB_4_int_3.jpg",
-];
 ---
 
 <Layout title="Empresas Mediáticas — Mediainc">
@@ -143,27 +114,18 @@ const residenteImages = [
     interval={4500}
   />
 
-  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-2/5">
-      <Carousel
-        images={residenteFoodImages}
-        alt="Residente Food&Drink Media"
-        height="h-[280px]"
-        fit="auto"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <img
-        src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/Residente-FOOD-AND-DRINK-MEDIA.png"
-        alt="Residente Food&Drink Media"
-        class="w-90 h-auto"
-      />
-      <time datetime="2015" class="mt-3 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2015 - 2030</time>
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
-      </p>
-    </div>
+  <section class="py-8 flex flex-col gap-6 font-medium font-['EB_Garamond'] text-center">
+    <p class="text-[30px] leading-[1.2] font-medium">
+      Over the past 25 years, Media Inc has participated in founding,
+      developing, and exiting companies across media, content, and
+      culture-adjacent industries.
+
+      These are not archived history. They represent a continuous process of
+      building: understanding what creates value in a specific context, and
+      knowing when to transform, sell, or close.
+
+      This track record informs everything Media Inc builds today.
+    </p>
   </section>
 
   <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
@@ -177,10 +139,15 @@ const residenteImages = [
       />
     </div>
     <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Cimientos</h2>
-      <time datetime="2018" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2018 - 2020</time>
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+        Cimientos
+      </h2>
+      <time
+        datetime="2018"
+        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+        >2018 - 2020</time
+      >
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
       </p>
     </div>
   </section>
@@ -196,10 +163,15 @@ const residenteImages = [
       />
     </div>
     <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Folio</h2>
-      <time datetime="2009" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2009 - 2017</time>
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+        Folio
+      </h2>
+      <time
+        datetime="2009"
+        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+        >2009 - 2017</time
+      >
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
       </p>
     </div>
   </section>
@@ -215,10 +187,15 @@ const residenteImages = [
       />
     </div>
     <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">La Tempestad</h2>
-      <time datetime="1998" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">1998 - 2017</time>
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+        La Tempestad
+      </h2>
+      <time
+        datetime="1998"
+        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+        >1998 - 2017</time
+      >
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
       </p>
     </div>
   </section>
@@ -234,10 +211,15 @@ const residenteImages = [
       />
     </div>
     <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Vocero</h2>
-      <time datetime="2005" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2005 - 2017</time>
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+        Vocero
+      </h2>
+      <time
+        datetime="2005"
+        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+        >2005 - 2017</time
+      >
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
       </p>
     </div>
   </section>
@@ -253,10 +235,15 @@ const residenteImages = [
       />
     </div>
     <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Trama</h2>
-      <time datetime="2012" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2012 - 2015</time>
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+        Trama
+      </h2>
+      <time
+        datetime="2012"
+        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+        >2012 - 2015</time
+      >
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
       </p>
     </div>
   </section>
@@ -272,31 +259,16 @@ const residenteImages = [
       />
     </div>
     <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Plataforma</h2>
-      <time datetime="2009" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2009 - 2014</time>
+      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+        Plataforma
+      </h2>
+      <time
+        datetime="2009"
+        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+        >2009 - 2014</time
+      >
       <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
       </p>
     </div>
   </section>
-
-  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-2/5">
-      <Carousel
-        images={residenteImages}
-        alt="Residente Ciudad"
-        height="h-[280px]"
-        fit="auto"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-3/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Residente Ciudad</h2>
-      <time datetime="2009" class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide">2009 - 2014</time>
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-        
-      </p>
-    </div>
-  </section>
-
 </Layout>

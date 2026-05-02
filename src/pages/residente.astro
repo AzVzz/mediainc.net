@@ -1,0 +1,180 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Carousel from "../components/Carousel.astro";
+
+const carrouselImages = [
+    "/images/residente_banner.jpg",
+    "/uploads/2014/10/ResidenteMty.jpg",
+];
+
+const residenteFoodImages = [
+    "/uploads/2019/06/RESIDENTE_mockup_fedro.jpg",
+    "/uploads/2019/06/RRW_Merch.jpg",
+    "/uploads/2019/06/RRW.png",
+    "/uploads/2019/06/RRM_Suplement_01.jpg",
+    "/uploads/2019/06/RRM_Suplement_02.jpg",
+    "/uploads/2019/06/RRW-01.jpg",
+    "/uploads/2019/06/RRW-02.jpg",
+];
+
+const residenteImages = [
+    "/images/RESIDENTE_rev_1_int_4.jpg",
+    "/images/RESIDENTE_rev_2_int_2.jpg",
+    "/images/RESIDENTE_rev_2_int_4.jpg",
+    "/images/RESIDENTE_rev_3_int_2.jpg",
+    "/images/RESIDENTE_rev_3_int_4.jpg",
+    "/images/RESIDENTE_rev_4_int_2.jpg",
+    "/images/RESIDENTE_rev_4_int_4.jpg",
+    "/images/RESIDENTE_rev_5_int_2.jpg",
+    "/images/RESIDENTE_rev_5_int_4.jpg",
+    "/images/RESIDENTE_rev_6_int_2.jpg",
+    "/images/RESIDENTE_rev_7_int_2.jpg",
+    "/images/RESIDENTE_rev_7_int_2b.jpg",
+    "/images/RESIDENTE_rev_8_int_2.jpg",
+    "/images/RESIDENTE_rev_8_int_2.png",
+    "/images/RESIDENTE_rev_9_int_2.jpg",
+    "/images/RESIDENTE_rev_10_int_2.jpg",
+    "/images/RESIDENTE_WEB_1_int_3.jpg",
+    "/images/RESIDENTE_WEB_2_int_3.jpg",
+    "/images/RESIDENTE_WEB_3_int_3.jpg",
+    "/images/RESIDENTE_WEB_4_int_3.jpg",
+];
+
+const residentePeriodico = ["/images/residentemx/ResidentePeriodico.PNG"]
+const residente2026 = ["/images/residentemx/Residentemx.PNG"];
+---
+
+<Layout title="Residente.mx — Mediainc">
+    <Carousel
+        images={carrouselImages}
+        alt="Empresas Mediáticas"
+        height="h-[310px]"
+        fit="cover"
+        interval={4500}
+    />
+    <section class="flex flex-col font-medium font-['EB_Garamond'] gap-5 my-10">
+        <p class="text-[65px] leading-[1] font-bold text-center">A platform where ideas are applied in real conditions.</p>
+        <h1 class="text-[25px] leading-[1.15] text-center">
+            Residente is Media Inc’s platform focused on the restaurant
+            industry, where content, distribution and tools come together to
+            engage both businesses and consumers. It functions as an operational
+            platform where ideas about value, perception and consumption are
+            applied in real conditions. It also serves as a space to experiment
+            with idea-driven journalism, cultural and current analysis, and
+            authority-building engines powered by AI and SEO. Through this, we
+            observe how relevance is created, scaled and monetized.
+        </h1>
+    </section>
+
+    {/* 2026 Residente.mx */}
+    <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+        <div class="w-full md:w-2/5">
+            <Carousel
+                images={residente2026}
+                alt="ResidenteMX"
+                height="h-[280px]"
+                fit="auto"
+                interval={4500}
+            />
+        </div>
+        <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+            <img
+                src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png"
+                alt="Residente Food&Drink Media"
+                class="w-45 h-auto"
+            />
+            <time
+                datetime="2015"
+                class="mt-3 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+                >2026</time
+            >
+            <p
+                class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]"
+            >
+            </p>
+        </div>
+    </section>
+
+    {/* 2015 - 2025 Food & Drink Media  */}
+    <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+        <div class="w-full md:w-2/5">
+            <Carousel
+                images={residenteFoodImages}
+                alt="Residente Food&Drink Media"
+                height="h-[280px]"
+                fit="auto"
+                interval={4500}
+            />
+        </div>
+        <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+            <img
+                src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/Residente-FOOD-AND-DRINK-MEDIA.png"
+                alt="Residente Food&Drink Media"
+                class="w-90 h-auto"
+            />
+            <time
+                datetime="2015"
+                class="mt-3 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+                >2015 - 2025</time
+            >
+            <p
+                class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]"
+            >
+            </p>
+        </div>
+    </section>
+
+    {/* 2009 - 2014 Residente. Acciones para una mejor ciudad */}
+    <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+        <div class="w-full md:w-2/5">
+            <Carousel
+                images={residenteImages}
+                alt="Residente Ciudad"
+                height="h-[280px]"
+                fit="auto"
+                interval={4500}
+            />
+        </div>
+        <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+            <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+                Residente. Acciones para una mejor ciudad
+            </h2>
+            <time
+                datetime="2009"
+                class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+                >2009 - 2014</time
+            >
+            <p
+                class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]"
+            >
+            </p>
+        </div>
+    </section>
+
+    {/* 2009 - 2011 Periodico Residente */}
+    <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
+        <div class="w-full md:w-2/5">
+            <Carousel
+                images={residentePeriodico}
+                alt="Residente Food&Drink Media"
+                height="h-[280px]"
+                fit="auto"
+                interval={4500}
+            />
+        </div>
+        <div class="md:w-3/5 flex flex-col justify-center self-stretch">
+            <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
+                Periodico Residente
+            </h2>
+            <time
+                datetime="2015"
+                class="mt-3 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
+                >2009 - 2011</time
+            >
+            <p
+                class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]"
+            >
+            </p>
+        </div>
+    </section>
+</Layout>
