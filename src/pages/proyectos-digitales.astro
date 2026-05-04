@@ -1,22 +1,75 @@
 ---
+export const prerender = false;
+
 import Layout from "../layouts/Layout.astro";
 import Banner from "../components/Banner.astro";
-import ProjectList from "../components/ProjectList.astro";
-import { proyectosDigitales } from "../data/projects";
+
+const API_URL = "https://admin.residente.mx/api/mediainc";
+const IMG_BASE = "https://residente.mx";
+
+let proyectos: any[] = [];
+try {
+  const res = await fetch(API_URL);
+  if (res.ok) {
+    proyectos = await res.json();
+  }
+} catch (err) {
+  console.error("Error fetching mediainc projects:", err);
+}
 ---
 
 <Layout title="Proyectos Digitales — Mediainc">
-  <Banner
-    image="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=300&fit=crop"
-  />
+  <section class="py-12">
+    <ul class="flex flex-col gap-10">
+      {proyectos.length === 0 ? (
+        <li class="text-center text-[#B5B5B5] py-8">No hay proyectos disponibles.</li>
+      ) : (
+        proyectos.map((p) => {
+          const imgSrc = p.imagen
+            ? `${IMG_BASE}${p.imagen.startsWith("/") ? "" : "/"}${p.imagen}`
+            : "";
+          const fecha = p.fecha_proyecto
+            ? new Date(p.fecha_proyecto).toLocaleDateString("es-MX", {
+                year: "numeric",
+                month: "long",
+              })
+            : "";
 
-  <div class="mt-6">
-    <img
-      src="/uploads/2019/06/Cimientos_we4_proyectos.jpg"
-      alt="Cimientos"
-      class="w-full h-auto"
-    />
-  </div>
-
-  <ProjectList projects={proyectosDigitales} />
+          return (
+            <li class="flex flex-col md:flex-row gap-6 border-b border-white/10 pb-10 last:border-b-0">
+              {imgSrc && (
+                <div class="md:w-2/5 flex-shrink-0">
+                  <img src={imgSrc} alt={p.titulo} class="w-full h-56 md:h-48 object-cover" loading="lazy" />
+                </div>
+              )}
+              <div class={`${imgSrc ? "md:w-3/5" : "w-full"} flex flex-col justify-center`}>
+                <h3 class="text-2xl font-bold text-white">
+                  {p.titulo}
+                </h3>
+                {fecha && (
+                  <time class="mt-1 text-xs text-[#B5B5B5] uppercase tracking-wider">{fecha}</time>
+                )}
+                {p.categoria && (
+                  <span class="mt-1 text-xs text-[#B5B5B5] uppercase tracking-wider">{p.categoria}</span>
+                )}
+                {p.descripcion && (
+                  <p class="mt-3 text-[#B5B5B5] leading-relaxed text-sm md:text-base">{p.descripcion}</p>
+                )}
+                {p.link && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-4 text-xs uppercase tracking-widest text-white border-b border-white/40 hover:border-white self-start"
+                  >
+                    Ver proyecto →
+                  </a>
+                )}
+              </div>
+            </li>
+          );
+        })
+      )}
+    </ul>
+  </section>
 </Layout>
