@@ -2,7 +2,15 @@
 const navLinks = [
   { line1: "Ideas", href: "/ideas" },
   { line1: "Ventures", href: "/empresas" },
-  { line1: "Projects", href: "/proyectos-digitales" },
+  {
+    line1: "Projects",
+    href: "/proyectos-digitales",
+    dropdown: [
+      { label: "Editorial", href: "/proyectos/editorial" },
+      { label: "Digital", href: "/proyectos/digital" },
+      { label: "Distribution", href: "/proyectos/distribution" },
+    ],
+  },
   { line1: "Advisory", href: "/consultoria" },
   { line1: "Residente", href: "/residente" },
 ];
@@ -22,8 +30,8 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
   <nav class="flex flex-col justify-end items-end h-full">
     <ul class="flex flex-wrap gap-y-3 uppercase tracking-wide items-center">
   {
-    navLinks.map(({ line1, href }) => {
-      const active = pathname === href;
+    navLinks.map(({ line1, href, dropdown }) => {
+      const active = pathname === href || (dropdown && dropdown.some((d: any) => pathname === d.href));
       const isAdvisory = line1 === "Advisory";
       const hasRightGap = ["Ideas", "Ventures", "Projects"].includes(line1);
       return (
@@ -32,10 +40,34 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
             <li>
               <a
                 href={href}
-                class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold ${active ? "text-white underline" : "text-[#B5B5B5]"}`}
+                class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold uppercase ${active ? "text-white underline" : "text-white"}`}
               >
                 <img src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png" alt="Residente" class="h-[13px] mb-[3px] w-auto" />
               </a>
+            </li>
+          ) : dropdown ? (
+            <li class={`relative group ${hasRightGap ? "mr-7" : ""}`}>
+              <button
+                class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold cursor-pointer uppercase ${active ? "text-white underline" : "text-white"}`}
+              >
+                {line1}
+                <svg class="w-3 h-3 ml-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <ul class="absolute top-full left-0 mt-2 min-w-[160px] bg-black/90 backdrop-blur-sm border border-white/10 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {dropdown.map((item: any) => {
+                  const subActive = pathname === item.href;
+                  return (
+                    <li>
+                      <a
+                        href={item.href}
+                        class={`block px-4 py-2 text-[12px] font-semibold uppercase tracking-wide transition-colors hover:bg-white/10 ${subActive ? "text-white" : "text-[#B5B5B5] hover:text-white"}`}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
             </li>
           ) : (
             <li class={hasRightGap ? "mr-7" : ""}>
