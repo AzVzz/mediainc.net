@@ -31,7 +31,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
     <div id="google_translate_element" class="hidden"></div>
 
     <!-- Language dropdown -->
-    <div class="relative group mb-8">
+    <div class="relative group mb-8" data-dropdown>
       <button class="flex flex-row items-center gap-1.5 cursor-pointer opacity-80 hover:opacity-100 transition-opacity">
         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="Language" class="h-[14px] w-auto grayscale" />
         <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
               </a>
             </li>
           ) : dropdown ? (
-            <li class={`relative group ${hasRightGap ? "mr-7" : ""}`}>
+            <li class={`relative group ${hasRightGap ? "mr-7" : ""}`} data-dropdown>
               <button
                 class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold cursor-pointer uppercase ${active ? "text-white underline" : "text-white"}`}
               >
@@ -141,6 +141,13 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
     overflow: hidden;
     pointer-events: none;
   }
+  [data-dropdown].open > ul {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  [data-dropdown].open > button > svg {
+    transform: rotate(180deg);
+  }
 </style>
 
 <script is:inline>
@@ -167,6 +174,25 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
       document.head.appendChild(s);
     }
+
+    // Touch-friendly dropdown toggle
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("[data-dropdown]").forEach(function (dd) {
+        dd.querySelector("button").addEventListener("click", function (e) {
+          var isOpen = dd.classList.contains("open");
+          document.querySelectorAll("[data-dropdown].open").forEach(function (d) {
+            d.classList.remove("open");
+          });
+          if (!isOpen) dd.classList.add("open");
+          e.stopPropagation();
+        });
+      });
+      document.addEventListener("click", function () {
+        document.querySelectorAll("[data-dropdown].open").forEach(function (d) {
+          d.classList.remove("open");
+        });
+      });
+    });
 
     window.setLanguage = function (lang) {
       if (lang === "en") {
