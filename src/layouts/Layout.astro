@@ -36,6 +36,31 @@ const secondaryLinks = [
     <meta name="apple-mobile-web-app-title" content="MediaInc" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mediainc.net" />
+    <meta property="og:image" content="https://mediainc.net/uploads/2019/06/MEDIA-INC-Logo.png" />
+    <meta property="og:image:alt" content="Mediainc Logo" />
+    <meta property="og:site_name" content="Mediainc" />
+    <meta property="og:locale" content="es_MX" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:image" content="https://mediainc.net/uploads/2019/06/MEDIA-INC-Logo.png" />
+
+    <!-- Google Structured Data (logo oficial en búsquedas) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Mediainc",
+        "url": "https://mediainc.net",
+        "logo": "https://mediainc.net/uploads/2019/06/MEDIA-INC-Logo.png"
+      }
+    </script>
   </head>
   <body class="bg-[#1F1F1F] text-[#EDEDED] font-sans antialiased">
     <div class="max-w-[930px] mx-auto px-4">
