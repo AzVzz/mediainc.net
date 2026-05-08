@@ -29,7 +29,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 
   <!-- Desktop nav -->
   <nav class="hidden md:flex flex-col justify-end items-end h-full">
-    <div id="google_translate_element" class="hidden"></div>
+    <div id="google_translate_element"></div>
 
     <div class="relative group mb-8" data-dropdown>
       <button class="flex flex-row items-center gap-1.5 cursor-pointer opacity-80 hover:opacity-100 transition-opacity">
@@ -222,29 +222,28 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 
 <script is:inline>
   (function () {
+    var host = window.location.hostname;
+    var root = host.split(".").slice(-2).join(".");
     var cookie = document.cookie.match(/(?:^|;\s*)googtrans=([^;]*)/);
     var val = cookie ? decodeURIComponent(cookie[1]) : "";
     var isES = val === "/en/es";
 
-    // Update desktop trigger flag
+    // Update flag UI to match current language
     var langFlag = document.getElementById("lang-flag");
     if (langFlag && isES) {
       langFlag.src = "https://flagcdn.com/w40/mx.png";
       langFlag.alt = "Español";
     }
-
-    // Highlight active mobile flag
     var mxFlag = document.getElementById("mobile-flag-mx");
     var usFlag = document.getElementById("mobile-flag-us");
     if (mxFlag && usFlag) {
-      if (isES) {
-        mxFlag.classList.replace("opacity-60", "opacity-100");
-      } else {
-        usFlag.classList.replace("opacity-60", "opacity-100");
-      }
+      mxFlag.classList.toggle("opacity-100", isES);
+      mxFlag.classList.toggle("opacity-60", !isES);
+      usFlag.classList.toggle("opacity-100", !isES);
+      usFlag.classList.toggle("opacity-60", isES);
     }
 
-    // Load Google Translate if Spanish is selected
+    // Load Google Translate only when Spanish is active
     if (isES) {
       window.googleTranslateElementInit = function () {
         new google.translate.TranslateElement(
@@ -259,11 +258,15 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 
     window.setLanguage = function (lang) {
       if (lang === "en") {
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=." + window.location.hostname + "; path=/";
+        var exp = "expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        document.cookie = "googtrans=; " + exp;
+        document.cookie = "googtrans=; " + exp + "; domain=" + host;
+        document.cookie = "googtrans=; " + exp + "; domain=." + host;
+        document.cookie = "googtrans=; " + exp + "; domain=" + root;
+        document.cookie = "googtrans=; " + exp + "; domain=." + root;
       } else {
         document.cookie = "googtrans=/en/" + lang + "; path=/";
-        document.cookie = "googtrans=/en/" + lang + "; domain=." + window.location.hostname + "; path=/";
+        document.cookie = "googtrans=/en/" + lang + "; path=/; domain=." + host;
       }
       window.location.reload();
     };
