@@ -33,7 +33,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 
     <div class="relative group mb-8" data-dropdown>
       <button class="flex flex-row items-center gap-1.5 cursor-pointer opacity-80 hover:opacity-100 transition-opacity">
-        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="Language" class="h-[14px] w-auto grayscale" />
+        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="Language" class="h-[14px] w-auto" style="filter:grayscale(100%)" />
         <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
@@ -41,13 +41,13 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       <ul class="absolute top-full right-0 mt-2 min-w-[130px] bg-black/90 backdrop-blur-sm border border-white/10 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
         <li>
           <button onclick="setLanguage('es')" class="w-full flex items-center gap-2.5 px-4 py-2 text-[12px] font-semibold uppercase tracking-wide text-[#B5B5B5] hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
-            <img src="https://flagcdn.com/w40/mx.png" alt="MX" class="h-[12px] w-auto grayscale" />
+            <img src="https://flagcdn.com/w40/mx.png" alt="MX" class="h-[12px] w-auto" style="filter:grayscale(100%)" />
             Español
           </button>
         </li>
         <li>
           <button onclick="setLanguage('en')" class="w-full flex items-center gap-2.5 px-4 py-2 text-[12px] font-semibold uppercase tracking-wide text-[#B5B5B5] hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
-            <img src="https://flagcdn.com/w40/us.png" alt="US" class="h-[12px] w-auto grayscale" />
+            <img src="https://flagcdn.com/w40/us.png" alt="US" class="h-[12px] w-auto" style="filter:grayscale(100%)" />
             English
           </button>
         </li>
@@ -121,10 +121,10 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
   <div class="flex md:hidden items-end pb-[6px] gap-4">
     <div class="flex items-center gap-2">
       <button onclick="setLanguage('es')" title="Español">
-        <img id="mobile-flag-mx" src="https://flagcdn.com/w40/mx.png" alt="Español" class="h-[14px] w-auto grayscale opacity-60 transition-opacity" />
+        <img id="mobile-flag-mx" src="https://flagcdn.com/w40/mx.png" alt="Español" class="h-[14px] w-auto opacity-60 transition-opacity" style="filter:grayscale(100%)" />
       </button>
       <button onclick="setLanguage('en')" title="English">
-        <img id="mobile-flag-us" src="https://flagcdn.com/w40/us.png" alt="English" class="h-[14px] w-auto grayscale opacity-60 transition-opacity" />
+        <img id="mobile-flag-us" src="https://flagcdn.com/w40/us.png" alt="English" class="h-[14px] w-auto opacity-60 transition-opacity" style="filter:grayscale(100%)" />
       </button>
     </div>
     <button id="hamburger" aria-label="Menu" class="text-white opacity-80 hover:opacity-100 transition-opacity">
