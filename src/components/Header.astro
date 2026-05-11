@@ -18,22 +18,22 @@ const navLinks = [
 const pathname = Astro.url.pathname.replace(/\/$/, "");
 ---
 
-<header class="flex flex-row justify-between pt-6 md:pt-9.5 mb-4 h-[70px] md:h-[110px] relative z-40">
+<header class="flex flex-row justify-between pt-9.5 mb-4 h-[110px]">
   <a href="/" class="inline-block self-end">
     <img
       src="/uploads/2019/06/MEDIA-INC-Logo.png"
       alt="Mediainc"
-      class="h-12 md:h-18 w-auto mb-[6px]"
+      class="h-18 w-auto mb-[6px]"
     />
   </a>
 
-  <!-- Desktop nav -->
-  <nav class="hidden md:flex flex-col justify-end items-end h-full">
-    <div id="google_translate_element"></div>
+  <nav class="flex flex-col justify-end items-end h-full">
+    <div id="google_translate_element" class="hidden"></div>
 
+    <!-- Language dropdown -->
     <div class="relative group mb-8" data-dropdown>
       <button class="flex flex-row items-center gap-1.5 cursor-pointer opacity-80 hover:opacity-100 transition-opacity">
-        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="Language" class="h-[14px] w-auto" style="filter:grayscale(100%)" />
+        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="Language" class="h-[14px] w-auto grayscale" />
         <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
@@ -41,13 +41,13 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       <ul class="absolute top-full right-0 mt-2 min-w-[130px] bg-black/90 backdrop-blur-sm border border-white/10 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
         <li>
           <button onclick="setLanguage('es')" class="w-full flex items-center gap-2.5 px-4 py-2 text-[12px] font-semibold uppercase tracking-wide text-[#B5B5B5] hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
-            <img src="https://flagcdn.com/w40/mx.png" alt="MX" class="h-[12px] w-auto" style="filter:grayscale(100%)" />
+            <img src="https://flagcdn.com/w40/mx.png" alt="MX" class="h-[12px] w-auto grayscale" />
             Español
           </button>
         </li>
         <li>
           <button onclick="setLanguage('en')" class="w-full flex items-center gap-2.5 px-4 py-2 text-[12px] font-semibold uppercase tracking-wide text-[#B5B5B5] hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
-            <img src="https://flagcdn.com/w40/us.png" alt="US" class="h-[12px] w-auto" style="filter:grayscale(100%)" />
+            <img src="https://flagcdn.com/w40/us.png" alt="US" class="h-[12px] w-auto grayscale" />
             English
           </button>
         </li>
@@ -55,136 +55,66 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
     </div>
 
     <ul class="flex flex-wrap gap-y-3 uppercase tracking-wide items-center">
-      {
-        navLinks.map(({ line1, href, dropdown }) => {
-          const active = pathname === href || (dropdown && dropdown.some((d: any) => pathname === d.href));
-          const isAdvisory = line1 === "Advisory";
-          const hasRightGap = ["Ideas", "Ventures", "Projects"].includes(line1);
-          return (
-            <>
-              {line1 === "Residente" ? (
-                <li>
-                  <a
-                    href={href}
-                    class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold uppercase ${active ? "text-white underline" : "text-white"}`}
-                  >
-                    <img src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png" alt="Residente" class="h-[13px] mb-[3px] w-auto" />
-                  </a>
-                </li>
-              ) : dropdown ? (
-                <li class={`relative group ${hasRightGap ? "mr-7" : ""}`} data-dropdown>
-                  <button
-                    class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold cursor-pointer uppercase ${active ? "text-white underline" : "text-white"}`}
-                  >
-                    {line1}
-                    <svg class="w-3 h-3 ml-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  <ul class="absolute top-full left-0 mt-2 min-w-[160px] bg-black/90 backdrop-blur-sm border border-white/10 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    {dropdown.map((item: any) => {
-                      const subActive = pathname === item.href;
-                      return (
-                        <li>
-                          <a
-                            href={item.href}
-                            class={`block px-4 py-2 text-[12px] font-semibold uppercase tracking-wide transition-colors hover:bg-white/10 ${subActive ? "text-white" : "text-[#B5B5B5] hover:text-white"}`}
-                          >
-                            {item.label}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
-              ) : (
-                <li class={hasRightGap ? "mr-7" : ""}>
-                  <a
-                    href={href}
-                    class={`text-[13px] leading-[1.1] flex flex-col transition-colors hover:underline font-extrabold text-white ${active ? "text-white underline" : "text-[#B5B5B5]"}`}
-                  >
-                    {line1}
-                  </a>
-                </li>
-              )}
-              {isAdvisory && (
-                <li class="text-[#B5B5B5] font-light select-none mx-3">|</li>
-              )}
-            </>
-          );
-        })
-      }
-    </ul>
-  </nav>
-
-  <!-- Mobile controls -->
-  <div class="flex md:hidden items-end pb-[6px] gap-4">
-    <div class="flex items-center gap-2">
-      <button onclick="setLanguage('es')" title="Español">
-        <img id="mobile-flag-mx" src="https://flagcdn.com/w40/mx.png" alt="Español" class="h-[14px] w-auto opacity-60 transition-opacity" style="filter:grayscale(100%)" />
-      </button>
-      <button onclick="setLanguage('en')" title="English">
-        <img id="mobile-flag-us" src="https://flagcdn.com/w40/us.png" alt="English" class="h-[14px] w-auto opacity-60 transition-opacity" style="filter:grayscale(100%)" />
-      </button>
-    </div>
-    <button id="hamburger" aria-label="Menu" class="text-white opacity-80 hover:opacity-100 transition-opacity">
-      <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-      <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-  </div>
-</header>
-
-<!-- Mobile menu overlay -->
-<div id="mobile-menu" class="hidden fixed top-[70px] left-0 right-0 bottom-0 z-40 bg-[#1F1F1F] overflow-y-auto md:hidden">
-  <nav class="px-6 py-6 flex flex-col">
-    {
-      navLinks.map(({ line1, href, dropdown }) => {
-        const active = pathname === href || (dropdown && dropdown.some((d: any) => pathname === d.href));
-        return (
-          <>
-            {line1 === "Residente" ? (
-              <a href={href} class="py-4 border-b border-white/10 flex items-center" onclick="closeMobileMenu()">
-                <img src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png" alt="Residente" class="h-[14px] w-auto" />
-              </a>
-            ) : dropdown ? (
-              <div class="border-b border-white/10">
-                <button class="w-full flex justify-between items-center py-4 text-[13px] font-extrabold uppercase tracking-wide text-white" data-mobile-accordion>
-                  {line1}
-                  <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div class="hidden flex-col gap-1 pb-3 pl-2" data-mobile-submenu>
-                  {dropdown.map((item: any) => (
-                    <a
-                      href={item.href}
-                      class="py-2 text-[12px] font-semibold uppercase tracking-wide text-[#B5B5B5] hover:text-white transition-colors"
-                      onclick="closeMobileMenu()"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
+  {
+    navLinks.map(({ line1, href, dropdown }) => {
+      const active = pathname === href || (dropdown && dropdown.some((d: any) => pathname === d.href));
+      const isAdvisory = line1 === "Advisory";
+      const hasRightGap = ["Ideas", "Ventures", "Projects"].includes(line1);
+      return (
+        <>
+          {line1 === "Residente" ? (
+            <li>
               <a
                 href={href}
-                class={`py-4 border-b border-white/10 text-[13px] font-extrabold uppercase tracking-wide transition-colors ${active ? "text-white underline" : "text-[#B5B5B5] hover:text-white"}`}
-                onclick="closeMobileMenu()"
+                class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold uppercase ${active ? "text-white underline" : "text-white"}`}
+              >
+                <img src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png" alt="Residente" class="h-[13px] mb-[3px] w-auto" />
+              </a>
+            </li>
+          ) : dropdown ? (
+            <li class={`relative group ${hasRightGap ? "mr-5" : ""}`}>
+              <button
+                class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold cursor-pointer uppercase ${active ? "text-white underline" : "text-white"}`}
+              >
+                {line1}
+                <svg class="w-3 h-3 ml-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <ul class="absolute top-full left-0 mt-2 min-w-[160px] bg-black/90 backdrop-blur-sm border border-white/10 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {dropdown.map((item: any) => {
+                  const subActive = pathname === item.href;
+                  return (
+                    <li>
+                      <a
+                        href={item.href}
+                        class={`block px-4 py-2 text-[12px] font-semibold uppercase tracking-wide transition-colors hover:bg-white/10 ${subActive ? "text-white" : "text-[#B5B5B5] hover:text-white"}`}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          ) : (
+            <li class={hasRightGap ? "mr-5" : ""}>
+              <a
+                href={href}
+                class={`text-[13px] leading-[1.1] flex flex-col transition-colors hover:underline font-extrabold text-white ${active ? "text-white underline" : "text-[#B5B5B5]"}`}
               >
                 {line1}
               </a>
-            )}
-          </>
-        );
-      })
-    }
+            </li>
+          )}
+          {isAdvisory && (
+            <li class="text-[#B5B5B5] font-light select-none mx-3">|</li>
+          )}
+        </>
+      );
+    })
+  }
+</ul>
   </nav>
-</div>
+</header>
 
 <style is:global>
   .goog-te-banner-frame,
@@ -211,39 +141,21 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
     overflow: hidden;
     pointer-events: none;
   }
-  [data-dropdown].open > ul {
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-  [data-dropdown].open > button > svg {
-    transform: rotate(180deg);
-  }
 </style>
 
 <script is:inline>
   (function () {
-    var host = window.location.hostname;
-    var root = host.split(".").slice(-2).join(".");
     var cookie = document.cookie.match(/(?:^|;\s*)googtrans=([^;]*)/);
     var val = cookie ? decodeURIComponent(cookie[1]) : "";
     var isES = val === "/en/es";
 
-    // Update flag UI to match current language
-    var langFlag = document.getElementById("lang-flag");
-    if (langFlag && isES) {
-      langFlag.src = "https://flagcdn.com/w40/mx.png";
-      langFlag.alt = "Español";
-    }
-    var mxFlag = document.getElementById("mobile-flag-mx");
-    var usFlag = document.getElementById("mobile-flag-us");
-    if (mxFlag && usFlag) {
-      mxFlag.classList.toggle("opacity-100", isES);
-      mxFlag.classList.toggle("opacity-60", !isES);
-      usFlag.classList.toggle("opacity-100", !isES);
-      usFlag.classList.toggle("opacity-60", isES);
+    // Update trigger flag to match active language
+    var flagImg = document.getElementById("lang-flag");
+    if (flagImg && isES) {
+      flagImg.src = "https://flagcdn.com/w40/mx.png";
+      flagImg.alt = "Español";
     }
 
-    // Load Google Translate only when Spanish is active
     if (isES) {
       window.googleTranslateElementInit = function () {
         new google.translate.TranslateElement(
@@ -258,70 +170,13 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 
     window.setLanguage = function (lang) {
       if (lang === "en") {
-        var exp = "expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-        document.cookie = "googtrans=; " + exp;
-        document.cookie = "googtrans=; " + exp + "; domain=" + host;
-        document.cookie = "googtrans=; " + exp + "; domain=." + host;
-        document.cookie = "googtrans=; " + exp + "; domain=" + root;
-        document.cookie = "googtrans=; " + exp + "; domain=." + root;
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=." + window.location.hostname + "; path=/";
       } else {
         document.cookie = "googtrans=/en/" + lang + "; path=/";
-        document.cookie = "googtrans=/en/" + lang + "; path=/; domain=." + host;
+        document.cookie = "googtrans=/en/" + lang + "; domain=." + window.location.hostname + "; path=/";
       }
       window.location.reload();
-    };
-
-    // Desktop dropdown toggle (touch-friendly)
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll("[data-dropdown]").forEach(function (dd) {
-        dd.querySelector("button").addEventListener("click", function (e) {
-          var isOpen = dd.classList.contains("open");
-          document.querySelectorAll("[data-dropdown].open").forEach(function (d) {
-            d.classList.remove("open");
-          });
-          if (!isOpen) dd.classList.add("open");
-          e.stopPropagation();
-        });
-      });
-      document.addEventListener("click", function () {
-        document.querySelectorAll("[data-dropdown].open").forEach(function (d) {
-          d.classList.remove("open");
-        });
-      });
-
-      // Hamburger menu
-      var hamburger = document.getElementById("hamburger");
-      var mobileMenu = document.getElementById("mobile-menu");
-      var hamburgerIcon = document.getElementById("hamburger-icon");
-      var closeIcon = document.getElementById("close-icon");
-
-      hamburger && hamburger.addEventListener("click", function () {
-        var isOpen = !mobileMenu.classList.contains("hidden");
-        mobileMenu.classList.toggle("hidden");
-        hamburgerIcon.classList.toggle("hidden", isOpen ? false : true);
-        closeIcon.classList.toggle("hidden", isOpen ? true : false);
-      });
-
-      // Mobile accordion for Projects
-      document.querySelectorAll("[data-mobile-accordion]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var submenu = btn.nextElementSibling;
-          var arrow = btn.querySelector("svg");
-          var isOpen = !submenu.classList.contains("hidden");
-          submenu.classList.toggle("hidden", isOpen);
-          submenu.classList.toggle("flex", !isOpen);
-          arrow.style.transform = isOpen ? "" : "rotate(180deg)";
-        });
-      });
-    });
-
-    window.closeMobileMenu = function () {
-      var mobileMenu = document.getElementById("mobile-menu");
-      var hamburgerIcon = document.getElementById("hamburger-icon");
-      var closeIcon = document.getElementById("close-icon");
-      if (mobileMenu) mobileMenu.classList.add("hidden");
-      if (hamburgerIcon) hamburgerIcon.classList.remove("hidden");
-      if (closeIcon) closeIcon.classList.add("hidden");
     };
   })();
 </script>
