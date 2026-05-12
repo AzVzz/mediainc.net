@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 const navLinks = [
   { line1: "Ideas", href: "/ideas" },
   { line1: "Ventures", href: "/empresas" },
@@ -62,15 +60,15 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
                 href={href}
                 class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold uppercase ${active ? "text-white underline" : "text-white"}`}
               >
-                <Image
+                <img
                   src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png"
                   alt="Residente"
-                  width={276}
-                  height={39}
+                  width="92"
+                  height="13"
                   loading="eager"
-                  decoding="sync"
+                  decoding="async"
                   fetchpriority="high"
-                  class="h-[13px] mb-[3px] w-[92px]"
+                  class="h-[13px] mb-[3px] w-[92px] object-contain"
                 />
               </a>
             </li>

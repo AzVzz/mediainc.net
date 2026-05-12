@@ -20,7 +20,7 @@ import Layout from "../layouts/Layout.astro";
   // Orden manual: los títulos aquí salen primero en este orden.
   // Los demás quedan después, ordenados por fecha desc.
   const ORDEN_MANUAL = [
-    "Guía turística para voluntarios",
+    "Guía turística para voluntarios FIFA 2026",
     "Culturall access",
     "Secuone 2026",
     "Héroes del servicio Coca Cola 2025",
@@ -49,7 +49,7 @@ import Layout from "../layouts/Layout.astro";
   const LOGO_ESTILO_DEFAULT = "h-12 w-auto mb-3 object-contain self-start";
 
   const LOGO_ESTILOS: Record<string, string> = {
-    "Guía turística para voluntarios": "h-16 w-auto mb-3 object-contain self-start",
+    "Guía turística para voluntarios FIFA 2026": "h-16 w-auto mb-3 object-contain self-start",
     "Culturall access": "h-14 w-auto mb-3 object-contain self-start",
     "Secuone 2026": "h-8 w-auto mb-3 object-contain self-start",
     "Héroes del servicio Coca Cola 2025": "h-8 w-auto mb-3 object-contain self-start",
@@ -84,16 +84,65 @@ import Layout from "../layouts/Layout.astro";
         return fb - fa;
       });
 
+      const srcAbsoluta = (url: string): string => {
+        if (!url) return "";
+        if (/^https?:\/\//i.test(url)) return url;
+        return `${IMG_BASE}${url.startsWith("/") ? "" : "/"}${url}`;
+      };
+
+      const escapeHtml = (v: string): string =>
+        v
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+
+      const listaImagenes = (proyecto: any): string[] => {
+        const portada = proyecto.imagen ? srcAbsoluta(proyecto.imagen) : null;
+        const galeria = Array.isArray(proyecto.imagenes)
+          ? [...proyecto.imagenes]
+              .sort((a: any, b: any) => (a.orden ?? 0) - (b.orden ?? 0))
+              .map((img: any) => srcAbsoluta(img.url))
+              .filter(Boolean)
+          : [];
+        const todas = portada ? [portada, ...galeria] : galeria;
+        return Array.from(new Set(todas));
+      };
+
+      const bloqueImagen = (imgs: string[], titulo: string): string => {
+        if (imgs.length === 0) return "";
+        const alt = escapeHtml(titulo);
+        if (imgs.length === 1) {
+          return `<div class="flex-shrink-0">
+            <img src="${imgs[0]}" alt="${alt}" class="w-[650px] h-[500px] object-cover max-w-full" loading="lazy" />
+          </div>`;
+        }
+        const slides = imgs
+          .map(
+            (src, i) => `<img
+              src="${src}"
+              alt="${alt}"
+              class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${i === 0 ? "opacity-100" : "opacity-0"}"
+              data-index="${i}"
+              loading="${i === 0 ? "eager" : "lazy"}"
+            />`
+          )
+          .join("");
+        return `<div class="flex-shrink-0">
+          <div class="carousel relative w-[650px] h-[500px] max-w-full overflow-hidden" data-interval="4000">
+            <div class="carousel-track relative w-full h-full">${slides}</div>
+            <button type="button" class="carousel-prev absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 text-white text-xl cursor-pointer transition-colors" aria-label="Anterior">‹</button>
+            <button type="button" class="carousel-next absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 text-white text-xl cursor-pointer transition-colors" aria-label="Siguiente">›</button>
+          </div>
+        </div>`;
+      };
+
       lista.innerHTML = proyectos
         .map((p: any) => {
-          const imgSrc = p.imagen
-            ? `${IMG_BASE}${p.imagen.startsWith("/") ? "" : "/"}${p.imagen}`
-            : "";
-          const logoSrc = p.logo
-            ? (/^https?:\/\//i.test(p.logo)
-                ? p.logo
-                : `${IMG_BASE}${p.logo.startsWith("/") ? "" : "/"}${p.logo}`)
-            : "";
+          const imgs = listaImagenes(p);
+          const tieneImagen = imgs.length > 0;
+          const logoSrc = p.logo ? srcAbsoluta(p.logo) : "";
           const fecha = p.fecha_proyecto
             ? new Date(p.fecha_proyecto).toLocaleDateString("es-MX", {
                 year: "numeric",
@@ -103,8 +152,8 @@ import Layout from "../layouts/Layout.astro";
 
           return `
           <li class="flex flex-col md:flex-row gap-6">
-            ${imgSrc ? `<div class="flex-shrink-0"><img src="${imgSrc}" alt="${p.titulo}" class="w-[650px] h-[500px] object-cover max-w-full" loading="lazy" /></div>` : ""}
-            <div class="${imgSrc ? "md:w-3/5" : "w-full"} flex flex-col justify-center">
+            ${bloqueImagen(imgs, p.titulo)}
+            <div class="${tieneImagen ? "md:w-3/5" : "w-full"} flex flex-col justify-center">
               ${logoSrc ? `<img src="${logoSrc}" alt="${p.titulo} logo" class="${ESTILO_MAP.get(normalizar(p.titulo)) ?? LOGO_ESTILO_DEFAULT}" loading="lazy" />` : ""}
               <h3 class="text-[25px] font-bold text-white leading-[1.05]">${p.titulo}</h3>
               ${p.categoria ? `<span class="mt-4 text-xs text-white font-black uppercase tracking-wider">${p.categoria}</span>` : ""}
@@ -115,6 +164,36 @@ import Layout from "../layouts/Layout.astro";
           </li>`;
         })
         .join("");
+
+      lista.querySelectorAll<HTMLElement>(".carousel").forEach((root) => {
+        const slides = Array.from(root.querySelectorAll<HTMLImageElement>(".carousel-slide"));
+        if (slides.length <= 1) return;
+        const prev = root.querySelector<HTMLButtonElement>(".carousel-prev");
+        const next = root.querySelector<HTMLButtonElement>(".carousel-next");
+        const intervalo = Number(root.dataset.interval) || 4000;
+        let current = 0;
+        let timer: number | undefined;
+        const show = (i: number) => {
+          current = (i + slides.length) % slides.length;
+          slides.forEach((s, idx) => {
+            s.classList.toggle("opacity-100", idx === current);
+            s.classList.toggle("opacity-0", idx !== current);
+          });
+        };
+        const start = () => {
+          stop();
+          timer = window.setInterval(() => show(current + 1), intervalo);
+        };
+        const stop = () => {
+          if (timer) window.clearInterval(timer);
+          timer = undefined;
+        };
+        prev?.addEventListener("click", () => { show(current - 1); start(); });
+        next?.addEventListener("click", () => { show(current + 1); start(); });
+        root.addEventListener("mouseenter", stop);
+        root.addEventListener("mouseleave", start);
+        start();
+      });
     } catch (err) {
       console.error(err);
     }
