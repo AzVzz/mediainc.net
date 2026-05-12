@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Proyectos — Mediainc">
   <section class="py-12">
+    <h2 class="text-[45px] leading-[1] font-bold text-center font-['EB_Garamond'] mb-12">The projects featured here are a curated selection from Media Inc's broader portfolio — a glimpse into the range of ideas we've brought to life across editorial, digital, and distribution.</h2>
     <ul id="proyectos-lista" class="flex flex-col gap-10"></ul>
   </section>
 </Layout>
@@ -11,6 +12,53 @@ import Layout from "../layouts/Layout.astro";
 <script>
   const API_URL = "https://admin.residente.mx/api/mediainc";
   const IMG_BASE = "https://residente.mx";
+
+  // Orden manual: los títulos aquí salen primero en este orden.
+  // Los demás quedan después, ordenados por fecha desc.
+  const ORDEN_MANUAL = [
+    "Guía turística para voluntarios",
+    "Culturall access",
+    "Secuone 2026",
+    "Héroes del servicio Coca Cola 2025",
+    "Topo Chico Edición Especial 2025",
+    "Guía oficial para organización de eventos",
+    "Guía festival Santa Lucía",
+    "Premio Obras Cemex",
+  ];
+
+  const normalizar = (s: string) =>
+    (s || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const ORDEN_MAP = new Map(
+    ORDEN_MANUAL.map((t, i) => [normalizar(t), i] as [string, number])
+  );
+
+  // Estilos individuales por logo. La key es el título del proyecto.
+  // Si un proyecto no aparece aquí se usa LOGO_ESTILO_DEFAULT.
+  // Puedes usar cualquier clase de Tailwind: h-8, h-12, h-16, w-auto, w-32,
+  // brightness-0 invert (volver blanco), opacity-80, etc.
+  const LOGO_ESTILO_DEFAULT = "h-12 w-auto mb-3 object-contain self-start";
+
+  const LOGO_ESTILOS: Record<string, string> = {
+    "Guía turística para voluntarios": "h-16 w-auto mb-3 object-contain self-start",
+    "Culturall access": "h-14 w-auto mb-3 object-contain self-start",
+    "Secuone 2026": "h-8 w-auto mb-3 object-contain self-start",
+    "Héroes del servicio Coca Cola 2025": "h-8 w-auto mb-3 object-contain self-start",
+    "Topo Chico Edición Especial 2025": "h-10 w-auto mb-3 object-contain self-start",
+    "Guía oficial para organización de eventos": "h-16 w-auto mb-3 object-contain self-start",
+    "Guía festival Santa Lucía": "h-16 w-auto mb-3 object-contain self-start",
+    "Premio Obras Cemex": "h-14 w-auto mb-3 object-contain self-start",
+    "Booklet CEMEX": "h-12 w-auto mb-3 object-contain self-start",
+  };
+
+  const ESTILO_MAP = new Map(
+    Object.entries(LOGO_ESTILOS).map(([k, v]) => [normalizar(k), v] as [string, string])
+  );
 
   async function cargarProyectos() {
     const lista = document.getElementById("proyectos-lista");
@@ -23,10 +71,24 @@ import Layout from "../layouts/Layout.astro";
 
       if (proyectos.length === 0) return;
 
+      proyectos.sort((a: any, b: any) => {
+        const ra = ORDEN_MAP.get(normalizar(a.titulo)) ?? Infinity;
+        const rb = ORDEN_MAP.get(normalizar(b.titulo)) ?? Infinity;
+        if (ra !== rb) return ra - rb;
+        const fa = a.fecha_proyecto ? new Date(a.fecha_proyecto).getTime() : 0;
+        const fb = b.fecha_proyecto ? new Date(b.fecha_proyecto).getTime() : 0;
+        return fb - fa;
+      });
+
       lista.innerHTML = proyectos
         .map((p: any) => {
           const imgSrc = p.imagen
             ? `${IMG_BASE}${p.imagen.startsWith("/") ? "" : "/"}${p.imagen}`
+            : "";
+          const logoSrc = p.logo
+            ? (/^https?:\/\//i.test(p.logo)
+                ? p.logo
+                : `${IMG_BASE}${p.logo.startsWith("/") ? "" : "/"}${p.logo}`)
             : "";
           const fecha = p.fecha_proyecto
             ? new Date(p.fecha_proyecto).toLocaleDateString("es-MX", {
@@ -36,13 +98,14 @@ import Layout from "../layouts/Layout.astro";
             : "";
 
           return `
-          <li class="flex flex-col md:flex-row gap-6 border-b border-white/10 pb-10 last:border-b-0">
+          <li class="flex flex-col md:flex-row gap-6">
             ${imgSrc ? `<div class="flex-shrink-0"><img src="${imgSrc}" alt="${p.titulo}" class="w-[650px] h-[500px] object-cover max-w-full" loading="lazy" /></div>` : ""}
             <div class="${imgSrc ? "md:w-3/5" : "w-full"} flex flex-col justify-center">
+              ${logoSrc ? `<img src="${logoSrc}" alt="${p.titulo} logo" class="${ESTILO_MAP.get(normalizar(p.titulo)) ?? LOGO_ESTILO_DEFAULT}" loading="lazy" />` : ""}
               <h3 class="text-[25px] font-bold text-white leading-[1.05]">${p.titulo}</h3>
-              ${fecha ? `<time class="mt-1 text-xs text-[#B5B5B5] uppercase tracking-wider">${fecha}</time>` : ""}
               ${p.categoria ? `<span class="mt-1 text-xs text-[#B5B5B5] uppercase tracking-wider">${p.categoria}</span>` : ""}
               ${p.descripcion ? `<p class="mt-3 text-[#B5B5B5] leading-[1.3] text-sm md:text-base">${p.descripcion}</p>` : ""}
+              ${fecha ? `<time class="mt-1 text-xs text-[#B5B5B5] uppercase tracking-wider">${fecha}</time>` : ""}
               ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer" class="mt-4 text-xs uppercase tracking-widest text-white border-b border-white/40 hover:border-white self-start">Ver proyecto →</a>` : ""}
             </div>
           </li>`;

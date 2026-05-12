@@ -1,16 +1,10 @@
 ---
+import { Image } from "astro:assets";
+
 const navLinks = [
   { line1: "Ideas", href: "/ideas" },
   { line1: "Ventures", href: "/empresas" },
-  {
-    line1: "Projects",
-    href: "/proyectos-digitales",
-    dropdown: [
-      { label: "Editorial", href: "/proyectos/editorial" },
-      { label: "Digital", href: "/proyectos/digital" },
-      { label: "Distribution", href: "/proyectos/distribution" },
-    ],
-  },
+  { line1: "Projects", href: "/proyectos-digitales" },
   { line1: "Advisory", href: "/consultoria" },
   { line1: "Residente", href: "/residente" },
 ];
@@ -68,7 +62,16 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
                 href={href}
                 class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold uppercase ${active ? "text-white underline" : "text-white"}`}
               >
-                <img src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png" alt="Residente" class="h-[13px] mb-[3px] w-auto" />
+                <Image
+                  src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png"
+                  alt="Residente"
+                  width={276}
+                  height={39}
+                  loading="eager"
+                  decoding="sync"
+                  fetchpriority="high"
+                  class="h-[13px] mb-[3px] w-[92px]"
+                />
               </a>
             </li>
           ) : dropdown ? (
