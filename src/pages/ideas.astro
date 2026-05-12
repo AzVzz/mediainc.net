@@ -3,7 +3,10 @@ import Banner from "../components/Banner.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Ideas — Mediainc">
+<Layout
+  title="Ideas — Mediainc"
+  description="JACH, Media Inc's research and authorship division: writing and visual work that examines how meaning, behavior and economic value are formed in contemporary culture."
+>
     <div class="bg-white">
         <Banner image="/images/jach/L_Media63 (1).jpg" />
     </div>
@@ -12,22 +15,23 @@ import Layout from "../layouts/Layout.astro";
     >
         <img
             src="/images/jach/JACH-w.png"
+            alt="JACH"
             class="h-6 w-auto object-contain mb-8"
         />
 
         <section class="flex flex-col gap-5 my-1">
-            <p class="text-[65px] leading-[1] font-bold text-center">
+            <h1 class="text-[65px] leading-[1] font-bold text-center">
                 Where meaning and value are explored through ideas.
-            </p>
+            </h1>
 
-            <h1 class="text-[30px] leading-[1]">
+            <p class="text-[30px] leading-[1]">
                 Media Inc operates on a defined point of view: value is not
                 inherent. It is constructed through perception, context, and
                 narrative. This perspective is developed through JACH, the
                 company's research and authorship division — an ongoing body of
                 writing and visual work that examines how meaning, behavior, and
                 economic value are formed in contemporary culture.
-            </h1>
+            </p>
         </section>
 
         <div class="py-8 text-[30px] leading-[1]">
@@ -43,14 +47,17 @@ import Layout from "../layouts/Layout.astro";
             <div class="flex justify-center gap-6 mt-10">
                 <img
                     src="/images/jach/L_Media63.jpg"
+                    alt="JACH research piece"
                     class="w-auto h-60 object-cover"
                 />
                 <img
                     src="/images/jach/L_Media67-400x400.jpg"
+                    alt="JACH research piece"
                     class="w-auto h-60 object-cover"
                 />
                 <img
                     src="/images/jach/L_Media45-300x372.jpg"
+                    alt="JACH research piece"
                     class="w-auto h-60 object-cover"
                 />
             </div>
@@ -71,14 +78,17 @@ import Layout from "../layouts/Layout.astro";
             <div class="flex justify-center gap-6 my-5">
                 <img
                     src="/images/jach/7.jpg"
+                    alt="JACH visual work"
                     class="w-auto h-60 object-cover"
                 />
                 <img
                     src="/images/jach/11.jpg"
+                    alt="JACH visual work"
                     class="w-auto h-60 object-cover"
                 />
                 <img
                     src="/images/jach/L_Media35.jpg"
+                    alt="JACH visual work"
                     class="w-auto h-60 object-cover"
                 />
             </div>
