@@ -155,7 +155,7 @@ export async function cargarProyectos(
         <li class="flex flex-col md:flex-row gap-6 border-b border-white/10 pb-10 last:border-b-0">
           ${bloqueImagen(imgs, p.titulo)}
           <div class="${imgs.length > 0 ? "md:w-3/5" : "w-full"} flex flex-col justify-center">
-            <h3 class="text-[25px] font-bold text-white leading-[1.05]">${tituloSeguro}</h3>
+            <h3 class="text-[25px] font-bold text-white leading-[1.05] notranslate" translate="no">${tituloSeguro}</h3>
             ${fecha ? `<time class="mt-1 text-xs text-[#B5B5B5] uppercase tracking-wider">${fecha}</time>` : ""}
             ${p.descripcion ? `<p class="mt-3 text-[#B5B5B5] leading-[1.3] text-sm md:text-base">${escapeHtml(p.descripcion)}</p>` : ""}
             ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer" class="mt-4 text-xs uppercase tracking-widest text-white border-b border-white/40 hover:border-white self-start">Ver proyecto →</a>` : ""}
