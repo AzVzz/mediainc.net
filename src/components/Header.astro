@@ -146,18 +146,48 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 
 <script is:inline>
   (function () {
-    var cookie = document.cookie.match(/(?:^|;\s*)googtrans=([^;]*)/);
-    var val = cookie ? decodeURIComponent(cookie[1]) : "";
-    var isES = val === "/en/es";
+    var STORAGE_KEY = "mediainc-lang";
 
-    // Update trigger flag to match active language
-    var flagImg = document.getElementById("lang-flag");
-    if (flagImg && isES) {
-      flagImg.src = "https://flagcdn.com/w40/mx.png";
-      flagImg.alt = "Español";
+    function clearGoogTransCookies() {
+      var hostname = window.location.hostname;
+      var parts = hostname.split(".");
+      var domains = [""];
+      for (var i = 0; i < parts.length - 1; i++) {
+        var d = parts.slice(i).join(".");
+        domains.push(d);
+        domains.push("." + d);
+      }
+      var paths = ["/", ""];
+      var expires = "expires=Thu, 01 Jan 1970 00:00:00 UTC";
+      for (var di = 0; di < domains.length; di++) {
+        for (var pi = 0; pi < paths.length; pi++) {
+          var c = "googtrans=; " + expires;
+          if (paths[pi]) c += "; path=" + paths[pi];
+          if (domains[di]) c += "; domain=" + domains[di];
+          document.cookie = c;
+        }
+      }
     }
 
-    if (isES) {
+    function setGoogTransCookie(lang) {
+      document.cookie = "googtrans=/en/" + lang + "; path=/";
+    }
+
+    var choice = null;
+    try { choice = sessionStorage.getItem(STORAGE_KEY); } catch (e) {}
+    if (choice !== "es" && choice !== "en") choice = "en";
+
+    var flagImg = document.getElementById("lang-flag");
+
+    if (choice === "es") {
+      clearGoogTransCookies();
+      setGoogTransCookie("es");
+
+      if (flagImg) {
+        flagImg.src = "https://flagcdn.com/w40/mx.png";
+        flagImg.alt = "Español";
+      }
+
       window.googleTranslateElementInit = function () {
         new google.translate.TranslateElement(
           { pageLanguage: "en", includedLanguages: "en,es", autoDisplay: false },
@@ -167,16 +197,15 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       var s = document.createElement("script");
       s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
       document.head.appendChild(s);
+    } else {
+      clearGoogTransCookies();
     }
 
     window.setLanguage = function (lang) {
-      if (lang === "en") {
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=." + window.location.hostname + "; path=/";
-      } else {
-        document.cookie = "googtrans=/en/" + lang + "; path=/";
-        document.cookie = "googtrans=/en/" + lang + "; domain=." + window.location.hostname + "; path=/";
-      }
+      if (lang !== "es" && lang !== "en") return;
+      try { sessionStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+      clearGoogTransCookies();
+      if (lang === "es") setGoogTransCookie("es");
       window.location.reload();
     };
   })();
