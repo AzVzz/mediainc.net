@@ -91,7 +91,7 @@
   --color-fg: #EDEDED;
   --color-muted: #B5B5B5;
   --font-sans: "Gotham", ui-sans-serif, system-ui, sans-serif;
-  --breakpoint-md: 640px;
+  --breakpoint-md: 1024px;
 }
 
 html {
@@ -103,7 +103,7 @@ html, body {
   color: var(--color-fg);
 }
 
-@media (max-width: 639.98px) {
+@media (max-width: 1023.98px) {
   [style*="--carousel-mobile-aspect"] {
     height: auto !important;
     aspect-ratio: var(--carousel-mobile-aspect);
