@@ -108,7 +108,7 @@ const empresas: Empresa[] = [
   {
     titulo: "LA TEMPESTAD",
     logo: "/uploads/2019/06/LT_logow.png",
-    logoClass: "h-12 w-auto mb-3 object-contain self-start",
+    logoClass: "h-10 w-auto mb-3 object-contain md:self-start",
     categoria: "DIGITAL NEWS, MAGAZINE, SUPLEMENT, EDUCATION,",
     descripcion: "LEADING ARTS MAGAZINE IN LATAM",
     fecha: "1998 - 2017",
@@ -117,7 +117,7 @@ const empresas: Empresa[] = [
   {
     titulo: "FOLIO.",
     logo: "/images/folio_logo.png",
-    logoClass: "h-12 w-auto mb-3 object-contain self-start",
+    logoClass: "h-8 w-auto mb-3 object-contain md:self-start",
     categoria: "DIGITAL NEWS, IWEEKLY NEWSPAPER, BOOK-MAGAZINE",
     descripcion:
       "THE FIRST OUTLET FOCUSED ON GLOBAL DESIGN AIMED AT MEXICAN READERS.",
@@ -127,7 +127,7 @@ const empresas: Empresa[] = [
   {
     titulo: "VOCERO.",
     logo: "/uploads/2019/06/vocero_logob.png",
-    logoClass: "h-10 w-auto mb-3 object-contain self-start",
+    logoClass: "h-10 w-auto mb-3 object-contain md:self-start",
     categoria: "MAGZINE",
     descripcion:
       "ARTS AND CULTURE FOR STUDENTS. DISTRIBUITED FREE IN THE TOP 50 UNIVERSITIES IN MEXICO.",
@@ -137,7 +137,7 @@ const empresas: Empresa[] = [
   {
     titulo: "TRAMA.",
     logo: "/images/trama_logo.png",
-    logoClass: "h-12 w-auto mb-3 object-contain self-start",
+    logoClass: "h-14 w-auto mb-3 object-contain md:self-start",
     categoria: "MAGAZINE",
     descripcion:
       "FIRST OUTLET FOCUSED ON THE TV AND MOVIE INDUTRY FOR MEXICAN AUDIENCES",
@@ -147,7 +147,7 @@ const empresas: Empresa[] = [
   {
     titulo: "CIMIENTOS.",
     logo: "/uploads/2019/06/03.png",
-    logoClass: "h-14 w-auto mb-3 object-contain self-start",
+    logoClass: "h-14 w-auto mb-3 object-contain md:self-start",
     categoria: "DIGITAL NEWPAPER, PRINTED NEWPAPER.",
     descripcion:
       "MEDIA OUTLET FOCUSED ON THE CONSTRUCTION INDUSTRY IN ASOCIATION WITH CEMEX: NYSE: CX",
@@ -167,11 +167,12 @@ const empresas: Empresa[] = [
     height="h-[310px]"
     fit="cover"
     interval={4500}
+    mobileAspect="29/10"
   />
 
   <section class="py-8 flex flex-col gap-6 font-medium font-['EB_Garamond'] text-center">
     <h1 class="sr-only">Ventures</h1>
-    <p class="text-[30px] leading-[1.2] font-medium">
+    <p class="text-[22px] md:text-[30px] leading-[1.2] font-medium">
       Over the past 25 years, Media Inc has participated in founding,
       developing, and exiting companies across media, content, and
       culture-adjacent industries.
@@ -186,27 +187,29 @@ const empresas: Empresa[] = [
 
   <section class="py-12 flex flex-col gap-10">
     {empresas.map((e) => (
-      <article class="flex flex-col md:flex-row gap-6 items-start">
-        <div class="w-full md:w-4/5">
+      <article class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+        <div class="w-[75%] md:w-4/5 mx-auto md:mx-0">
           <Carousel
             images={e.imagenes}
             alt={e.titulo}
             height="h-[450px]"
             fit="auto"
             interval={4500}
+            autoplay={false}
+            mobileAspect="8/5"
           />
         </div>
-        <div class="md:w-1/5 flex flex-col justify-center self-stretch">
+        <div class="md:w-1/5 flex flex-col justify-center items-center md:items-start self-stretch px-2 md:px-0">
           <img
             src={e.logo}
             alt={`${e.titulo} logo`}
             class={e.logoClass}
             loading="lazy"
           />
-          <span class="mt-4 text-xs text-white font-black uppercase tracking-wider">
+          <span class="mt-4 text-xs text-white text-center md:text-left font-black uppercase tracking-wider">
             {e.categoria}
           </span>
-          <p class="mt-3 text-[#B5B5B5] leading-[1.2] text-sm md:text-base">
+          <p class="mt-3 text-[#B5B5B5] text-center md:text-left leading-[1.2] text-sm md:text-base">
             {e.descripcion}
           </p>
           <time class="mt-4 text-sm text-white uppercase font-bold tracking-wider">

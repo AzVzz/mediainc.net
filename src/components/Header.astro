@@ -10,27 +10,27 @@ const navLinks = [
 const pathname = Astro.url.pathname.replace(/\/$/, "");
 ---
 
-<header class="flex flex-row justify-between pt-9.5 mb-4 h-[110px]">
-  <a href="/" class="inline-block self-end">
+<header class="relative flex flex-col md:flex-row md:justify-between md:items-end gap-3 md:gap-0 pt-9.5 mb-4 md:h-[110px]">
+  <a href="/" class="inline-block shrink-0">
     <img
       src="/uploads/2019/06/MEDIA-INC-Logo.png"
       alt="Mediainc"
-      class="h-18 w-auto mb-[6px]"
+      class="h-12 md:h-18 w-auto mb-[6px] object-contain"
     />
   </a>
 
-  <nav class="flex flex-col justify-end items-end h-full">
+  <nav class="flex flex-col items-start md:items-end justify-end w-full md:w-auto md:h-full">
     <div id="google_translate_element" class="hidden"></div>
 
     <!-- Language dropdown -->
-    <div class="relative group mb-8" data-dropdown>
+    <div class="relative group mb-2 md:mb-8 max-md:absolute max-md:top-[54px] max-md:right-0 max-md:mb-0" data-dropdown>
       <button class="flex flex-row items-center gap-1.5 cursor-pointer opacity-80 hover:opacity-100 transition-opacity">
         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="Language" class="h-[14px] w-auto" style="filter:grayscale(100%)" />
         <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <ul class="absolute top-full right-0 mt-2 min-w-[130px] bg-black/90 backdrop-blur-sm border border-white/10 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+      <ul class="absolute top-full right-0 mt-2 min-w-[130px] bg-black/90 backdrop-blur-sm border border-white/10 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 z-50">
         <li>
           <button onclick="setLanguage('es')" class="w-full flex items-center gap-2.5 px-4 py-2 text-[12px] font-semibold uppercase tracking-wide text-[#B5B5B5] hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
             <img src="https://flagcdn.com/w40/mx.png" alt="MX" class="h-[12px] w-auto" style="filter:grayscale(100%)" />
@@ -46,7 +46,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       </ul>
     </div>
 
-    <ul class="flex flex-wrap gap-y-3 uppercase tracking-wide items-center">
+    <ul class="flex flex-nowrap md:flex-wrap gap-y-3 uppercase tracking-wide items-center">
   {
     navLinks.map(({ line1, href, dropdown }) => {
       const active = pathname === href || (dropdown && dropdown.some((d: any) => pathname === d.href));
@@ -55,10 +55,10 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       return (
         <>
           {line1 === "Residente" ? (
-            <li>
+            <li class="shrink-0">
               <a
                 href={href}
-                class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold uppercase ${active ? "text-white underline" : "text-white"}`}
+                class={`text-[10px] md:text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold uppercase ${active ? "text-white underline" : "text-white"}`}
               >
                 <img
                   src="https://residente.mx/fotos/fotos-estaticas/residente-logos/blancos/logo%20residente.mx-99-100.png"
@@ -68,14 +68,14 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
                   loading="eager"
                   decoding="async"
                   fetchpriority="high"
-                  class="h-[13px] mb-[3px] w-[92px] object-contain"
+                  class="h-[10px] md:h-[13px] mb-[3px] w-[71px] md:w-[92px] object-contain"
                 />
               </a>
             </li>
           ) : dropdown ? (
-            <li class={`relative group ${hasRightGap ? "mr-5" : ""}`}>
+            <li class={`relative group shrink-0 ${hasRightGap ? "mr-2 md:mr-5" : ""}`}>
               <button
-                class={`text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold cursor-pointer uppercase ${active ? "text-white underline" : "text-white"}`}
+                class={`text-[10px] md:text-[13px] leading-[1.1] flex flex-row items-center gap-1 transition-colors hover:underline font-extrabold cursor-pointer uppercase ${active ? "text-white underline" : "text-white"}`}
               >
                 {line1}
                 <svg class="w-3 h-3 ml-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
@@ -97,17 +97,17 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
               </ul>
             </li>
           ) : (
-            <li class={hasRightGap ? "mr-5" : ""}>
+            <li class={`shrink-0 ${hasRightGap ? "mr-2 md:mr-5" : ""}`}>
               <a
                 href={href}
-                class={`text-[13px] leading-[1.1] flex flex-col transition-colors hover:underline font-extrabold text-white ${active ? "text-white underline" : "text-[#B5B5B5]"}`}
+                class={`text-[10px] md:text-[13px] leading-[1.1] flex flex-col transition-colors hover:underline font-extrabold text-white ${active ? "text-white underline" : "text-[#B5B5B5]"}`}
               >
                 {line1}
               </a>
             </li>
           )}
           {isConsultancy && (
-            <li class="text-[#B5B5B5] font-light select-none mx-3">|</li>
+            <li class="text-[#B5B5B5] font-light select-none shrink-0 mx-2 md:mx-3">|</li>
           )}
         </>
       );

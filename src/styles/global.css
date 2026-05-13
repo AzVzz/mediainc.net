@@ -101,3 +101,10 @@ html, body {
   background-color: var(--color-bg);
   color: var(--color-fg);
 }
+
+@media (max-width: 767.98px) {
+  [style*="--carousel-mobile-aspect"] {
+    height: auto !important;
+    aspect-ratio: var(--carousel-mobile-aspect);
+  }
+}

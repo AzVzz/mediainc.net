@@ -8,7 +8,7 @@ import Layout from "../layouts/Layout.astro";
 >
   <section class="py-12">
     <h1 class="sr-only">Projects</h1>
-    <h2 class="text-[45px] leading-[1] font-bold text-center font-['EB_Garamond'] mb-12">The projects featured here are a curated selection from Media Inc's broader portfolio — a glimpse into the range of ideas we've brought to life across editorial, digital, and distribution.</h2>
+    <h2 class="text-[30px] md:text-[45px] leading-[1] font-bold text-center font-['EB_Garamond'] mb-12">The projects featured here are a curated selection from Media Inc's broader portfolio — a glimpse into the range of ideas we've brought to life across editorial, digital, and distribution.</h2>
     <ul id="proyectos-lista" class="flex flex-col gap-10"></ul>
   </section>
 </Layout>
@@ -47,18 +47,18 @@ import Layout from "../layouts/Layout.astro";
   // Si un proyecto no aparece aquí se usa LOGO_ESTILO_DEFAULT.
   // Puedes usar cualquier clase de Tailwind: h-8, h-12, h-16, w-auto, w-32,
   // brightness-0 invert (volver blanco), opacity-80, etc.
-  const LOGO_ESTILO_DEFAULT = "h-12 w-auto mb-3 object-contain self-start";
+  const LOGO_ESTILO_DEFAULT = "h-12 w-auto mb-3 object-contain md:self-start";
 
   const LOGO_ESTILOS: Record<string, string> = {
-    "Guía turística para voluntarios FIFA 2026": "h-16 w-auto mb-3 object-contain self-start",
-    "Culturall Access Nuevo León": "h-14 w-auto mb-3 object-contain self-start",
-    "On demand digital content": "h-8 w-auto mb-3 object-contain self-start",
-    "Héroes del servicio Coca Cola": "h-8 w-auto mb-3 object-contain self-start",
-    "Recetario Topo Chico": "h-10 w-auto mb-3 object-contain self-start",
-    "Book oficial de Monterrey.Destino": "h-16 w-auto mb-3 object-contain self-start",
-    "Agenda del festival Santa Lucía": "h-16 w-auto mb-3 object-contain self-start",
-    "Libro memoria del Premio Obras Cemex": "h-14 w-auto mb-3 object-contain self-start",
-    "Ideas que Construyen Vida": "h-12 w-auto mb-3 object-contain self-start",
+    "Guía turística para voluntarios FIFA 2026": "h-16 w-auto mb-3 object-contain md:self-start",
+    "Culturall Access Nuevo León": "h-14 w-auto mb-3 object-contain md:self-start",
+    "On demand digital content": "h-8 w-auto mb-3 object-contain md:self-start",
+    "Héroes del servicio Coca Cola": "h-8 w-auto mb-3 object-contain md:self-start",
+    "Recetario Topo Chico": "h-10 w-auto mb-3 object-contain md:self-start",
+    "Book oficial de Monterrey.Destino": "h-16 w-auto mb-3 object-contain md:self-start",
+    "Agenda del festival Santa Lucía": "h-16 w-auto mb-3 object-contain md:self-start",
+    "Libro memoria del Premio Obras Cemex": "h-14 w-auto mb-3 object-contain md:self-start",
+    "Ideas que Construyen Vida": "h-12 w-auto mb-3 object-contain md:self-start",
   };
 
   const ESTILO_MAP = new Map(
@@ -114,8 +114,8 @@ import Layout from "../layouts/Layout.astro";
         if (imgs.length === 0) return "";
         const alt = escapeHtml(titulo);
         if (imgs.length === 1) {
-          return `<div class="flex-shrink-0">
-            <img src="${imgs[0]}" alt="${alt}" class="w-[650px] h-[500px] object-cover max-w-full" loading="lazy" />
+          return `<div class="flex-shrink-0 w-[75%] md:w-auto mx-auto md:mx-0">
+            <img src="${imgs[0]}" alt="${alt}" class="w-[650px] h-[500px] object-cover max-w-full" style="--carousel-mobile-aspect: 13/10" loading="lazy" />
           </div>`;
         }
         const slides = imgs
@@ -129,8 +129,8 @@ import Layout from "../layouts/Layout.astro";
             />`
           )
           .join("");
-        return `<div class="flex-shrink-0">
-          <div class="carousel relative w-[650px] h-[500px] max-w-full overflow-hidden" data-interval="4000">
+        return `<div class="flex-shrink-0 w-[75%] md:w-auto mx-auto md:mx-0">
+          <div class="carousel relative w-[650px] h-[500px] max-w-full overflow-hidden" style="--carousel-mobile-aspect: 13/10" data-interval="4000">
             <div class="carousel-track relative w-full h-full">${slides}</div>
             <button type="button" class="carousel-prev absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 text-white text-xl cursor-pointer transition-colors" aria-label="Anterior">‹</button>
             <button type="button" class="carousel-next absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 text-white text-xl cursor-pointer transition-colors" aria-label="Siguiente">›</button>
@@ -146,15 +146,15 @@ import Layout from "../layouts/Layout.astro";
           const fecha = p.fecha_proyecto ? escapeHtml(p.fecha_proyecto) : "";
 
           return `
-          <li class="flex flex-col md:flex-row gap-6">
+          <li class="flex flex-col md:flex-row gap-6 items-center md:items-start">
             ${bloqueImagen(imgs, p.titulo)}
-            <div class="${tieneImagen ? "md:w-3/5" : "w-full"} flex flex-col justify-center">
+            <div class="${tieneImagen ? "md:w-3/5" : "w-full"} flex flex-col justify-center items-center md:items-start px-2 md:px-0">
               ${logoSrc ? `<img src="${logoSrc}" alt="${p.titulo} logo" class="${ESTILO_MAP.get(normalizar(p.titulo)) ?? LOGO_ESTILO_DEFAULT}" loading="lazy" />` : ""}
-              <h3 class="text-[25px] font-bold text-white leading-[1.05] notranslate" translate="no">${p.titulo}</h3>
-              ${p.categoria ? `<span class="mt-4 text-xs text-white font-black uppercase tracking-wider">${p.categoria}</span>` : ""}
-              ${p.descripcion ? `<p class="mt-3 text-[#B5B5B5] leading-[1.2] text-sm md:text-base">${p.descripcion}</p>` : ""}
+              <h3 class="text-[18px] md:text-[25px] font-bold text-white leading-[1.05] text-center md:text-left notranslate" translate="no">${p.titulo}</h3>
+              ${p.categoria ? `<span class="mt-4 text-xs text-white font-black uppercase tracking-wider text-center md:text-left">${p.categoria}</span>` : ""}
+              ${p.descripcion ? `<p class="mt-3 text-[#B5B5B5] leading-[1.2] text-sm md:text-base text-center md:text-left">${p.descripcion}</p>` : ""}
               ${fecha ? `<time class="mt-4 text-sm text-white uppercase font-bold tracking-wider">${fecha}</time>` : ""}
-              ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer" class="mt-4 text-xs uppercase tracking-widest text-white border-b border-white/40 hover:border-white self-start">Ver proyecto →</a>` : ""}
+              ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer" class="mt-4 text-xs uppercase tracking-widest text-white border-b border-white/40 hover:border-white md:self-start">Ver proyecto →</a>` : ""}
             </div>
           </li>`;
         })
@@ -165,9 +165,7 @@ import Layout from "../layouts/Layout.astro";
         if (slides.length <= 1) return;
         const prev = root.querySelector<HTMLButtonElement>(".carousel-prev");
         const next = root.querySelector<HTMLButtonElement>(".carousel-next");
-        const intervalo = Number(root.dataset.interval) || 4000;
         let current = 0;
-        let timer: number | undefined;
         const show = (i: number) => {
           current = (i + slides.length) % slides.length;
           slides.forEach((s, idx) => {
@@ -175,19 +173,8 @@ import Layout from "../layouts/Layout.astro";
             s.classList.toggle("opacity-0", idx !== current);
           });
         };
-        const start = () => {
-          stop();
-          timer = window.setInterval(() => show(current + 1), intervalo);
-        };
-        const stop = () => {
-          if (timer) window.clearInterval(timer);
-          timer = undefined;
-        };
-        prev?.addEventListener("click", () => { show(current - 1); start(); });
-        next?.addEventListener("click", () => { show(current + 1); start(); });
-        root.addEventListener("mouseenter", stop);
-        root.addEventListener("mouseleave", start);
-        start();
+        prev?.addEventListener("click", () => show(current - 1));
+        next?.addEventListener("click", () => show(current + 1));
       });
     } catch (err) {
       console.error(err);

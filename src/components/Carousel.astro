@@ -5,6 +5,8 @@ interface Props {
   interval?: number; // ms entre slides
   height?: string;   // tailwind arbitrary, ej. "h-[400px]"
   fit?: "contain" | "cover" | "auto";
+  autoplay?: boolean;
+  mobileAspect?: string; // ej. "16/9" — usa aspect-ratio en mobile, ignora height
 }
 
 const {
@@ -13,6 +15,8 @@ const {
   interval = 4000,
   height = "h-[400px]",
   fit = "contain",
+  autoplay = true,
+  mobileAspect,
 } = Astro.props;
 
 const objectFitClass =
@@ -25,6 +29,8 @@ const autoFit = fit === "auto";
     class={`carousel relative w-full ${height} overflow-hidden`}
     data-interval={interval}
     data-auto-fit={autoFit ? "true" : "false"}
+    data-autoplay={autoplay ? "true" : "false"}
+    style={mobileAspect ? `--carousel-mobile-aspect: ${mobileAspect};` : undefined}
   >
     <div class="carousel-track relative w-full h-full">
       {images.map((src, i) => (
@@ -58,6 +64,7 @@ const autoFit = fit === "auto";
     const next = root.querySelector<HTMLButtonElement>(".carousel-next");
     const interval = Number(root.dataset.interval) || 4000;
     const autoFit = root.dataset.autoFit === "true";
+    const autoplay = root.dataset.autoplay !== "false";
 
     if (autoFit) {
       const applyFit = (img: HTMLImageElement) => {
@@ -94,13 +101,14 @@ const autoFit = fit === "auto";
       timer = undefined;
     };
 
-    prev?.addEventListener("click", () => { show(current - 1); start(); });
-    next?.addEventListener("click", () => { show(current + 1); start(); });
+    prev?.addEventListener("click", () => { show(current - 1); if (autoplay) start(); });
+    next?.addEventListener("click", () => { show(current + 1); if (autoplay) start(); });
 
-    root.addEventListener("mouseenter", stop);
-    root.addEventListener("mouseleave", start);
-
-    start();
+    if (autoplay) {
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("mouseleave", start);
+      start();
+    }
   }
 
   document.querySelectorAll<HTMLElement>(".carousel").forEach(initCarousel);
