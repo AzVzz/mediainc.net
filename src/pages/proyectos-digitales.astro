@@ -9,7 +9,7 @@ import Layout from "../layouts/Layout.astro";
   <section class="py-12">
     <h1 class="sr-only">Projects</h1>
     <h2 class="text-[30px] md:text-[45px] leading-[1] font-bold text-center font-['EB_Garamond'] mb-12">The projects featured here are a curated selection from Media Inc's broader portfolio — a glimpse into the range of ideas we've brought to life across editorial, digital, and distribution.</h2>
-    <ul id="proyectos-lista" class="flex flex-col gap-10"></ul>
+    <ul id="proyectos-lista" class="flex flex-col md:gap-10"></ul>
   </section>
 </Layout>
 
@@ -146,7 +146,7 @@ import Layout from "../layouts/Layout.astro";
           const fecha = p.fecha_proyecto ? escapeHtml(p.fecha_proyecto) : "";
 
           return `
-          <li class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+          <li class="flex flex-col md:flex-row gap-6 items-center md:items-start max-md:py-8 max-md:border-b max-md:border-white/30">
             ${bloqueImagen(imgs, p.titulo)}
             <div class="${tieneImagen ? "md:w-3/5" : "w-full"} flex flex-col justify-center items-center md:items-start px-2 md:px-0">
               ${logoSrc ? `<img src="${logoSrc}" alt="${p.titulo} logo" class="${ESTILO_MAP.get(normalizar(p.titulo)) ?? LOGO_ESTILO_DEFAULT}" loading="lazy" />` : ""}
