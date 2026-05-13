@@ -146,7 +146,7 @@ import Layout from "../layouts/Layout.astro";
           const fecha = p.fecha_proyecto ? escapeHtml(p.fecha_proyecto) : "";
 
           return `
-          <li class="flex flex-col md:flex-row gap-6 items-center md:items-start max-md:py-8 max-md:border-b max-md:border-white/30">
+          <li class="flex flex-col md:flex-row gap-6 items-center md:items-center max-md:py-8 max-md:border-b max-md:border-white/30">
             ${bloqueImagen(imgs, p.titulo)}
             <div class="${tieneImagen ? "md:w-3/5" : "w-full"} flex flex-col justify-center items-center md:items-start px-2 md:px-0">
               ${logoSrc ? `<img src="${logoSrc}" alt="${p.titulo} logo" class="${ESTILO_MAP.get(normalizar(p.titulo)) ?? LOGO_ESTILO_DEFAULT}" loading="lazy" />` : ""}
