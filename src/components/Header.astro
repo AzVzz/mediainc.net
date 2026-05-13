@@ -209,4 +209,34 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
       window.location.reload();
     };
   })();
+
+  // Toggle del dropdown de idioma con click (para touch/tablet)
+  (function () {
+    var dropdown = document.querySelector("[data-dropdown]");
+    if (!dropdown) return;
+    var button = dropdown.querySelector("button");
+    var menu = dropdown.querySelector("ul");
+    if (!button || !menu) return;
+
+    var open = function () {
+      menu.style.opacity = "1";
+      menu.style.visibility = "visible";
+      dropdown.setAttribute("data-open", "true");
+    };
+    var close = function () {
+      menu.style.opacity = "";
+      menu.style.visibility = "";
+      dropdown.removeAttribute("data-open");
+    };
+
+    button.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (dropdown.getAttribute("data-open") === "true") close();
+      else open();
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!dropdown.contains(e.target)) close();
+    });
+  })();
 </script>
