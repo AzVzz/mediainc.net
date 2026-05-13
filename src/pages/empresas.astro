@@ -188,15 +188,15 @@ const empresas: Empresa[] = [
   <section class="py-12 flex flex-col md:gap-10">
     {empresas.map((e) => (
       <article class="flex flex-col md:flex-row gap-6 items-center md:items-start max-md:py-8 max-md:border-b max-md:border-white/30">
-        <div class="w-full md:w-4/5 mx-auto md:mx-0">
+        <div class="w-full md:w-[650px] mx-auto md:mx-0 md:flex-shrink-0">
           <Carousel
             images={e.imagenes}
             alt={e.titulo}
-            height="h-[450px]"
+            height="h-[500px]"
             fit="auto"
             interval={4500}
             autoplay={false}
-            mobileAspect="8/5"
+            mobileAspect="13/10"
           />
         </div>
         <div class="md:w-1/5 flex flex-col justify-center items-center md:items-start self-stretch px-2 md:px-0">
