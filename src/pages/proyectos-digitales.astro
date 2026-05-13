@@ -78,10 +78,9 @@ import Layout from "../layouts/Layout.astro";
       proyectos.sort((a: any, b: any) => {
         const ra = ORDEN_MAP.get(normalizar(a.titulo)) ?? Infinity;
         const rb = ORDEN_MAP.get(normalizar(b.titulo)) ?? Infinity;
-        if (ra !== rb) return ra - rb;
-        const fa = a.fecha_proyecto ? new Date(a.fecha_proyecto).getTime() : 0;
-        const fb = b.fecha_proyecto ? new Date(b.fecha_proyecto).getTime() : 0;
-        return fb - fa;
+        return ra - rb;
+        // Sort estable (ES2019+): los proyectos no listados en ORDEN_MANUAL
+        // mantienen el orden que devuelve la API (created_at DESC).
       });
 
       const srcAbsoluta = (url: string): string => {
@@ -143,12 +142,7 @@ import Layout from "../layouts/Layout.astro";
           const imgs = listaImagenes(p);
           const tieneImagen = imgs.length > 0;
           const logoSrc = p.logo ? srcAbsoluta(p.logo) : "";
-          const fecha = p.fecha_proyecto
-            ? new Date(p.fecha_proyecto).toLocaleDateString("es-MX", {
-                year: "numeric",
-                month: "long",
-              })
-            : "";
+          const fecha = p.fecha_proyecto ? escapeHtml(p.fecha_proyecto) : "";
 
           return `
           <li class="flex flex-col md:flex-row gap-6">
