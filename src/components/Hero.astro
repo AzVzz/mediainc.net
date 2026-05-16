@@ -1,9 +1,23 @@
 ---
 import Banner from "../components/Banner.astro";
+import Carousel from "./Carousel.astro";
+
+const consultoriaImages = [
+  "/uploads/2019/06/BANNERS_VISION.jpg",
+  "/uploads/2019/06/BANNER1_teorias.jpg",
+  "/uploads/2019/06/BANNER2_teorias.png",
+];
 ---
 
 <section>
-  <Banner image="/uploads/2019/06/BANNERS_VISION.jpg" />
+  <Carousel
+    images={consultoriaImages}
+    alt="Mediainc"
+    height="h-[310px]"
+    fit="cover"
+    interval={4500}
+    mobileAspect="29/10"
+  />
 
   <div class="flex flex-col ml-auto mt-10 font-medium font-['EB_Garamond']">
     <h1 class="text-center text-[24px] mb-6 leading-[1]">

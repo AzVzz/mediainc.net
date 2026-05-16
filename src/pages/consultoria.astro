@@ -3,10 +3,70 @@ import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/Carousel.astro";
 import ProjectList from "../components/ProjectList.astro";
 import { proyectosEditoriales } from "../data/projects";
+import Banner from "../components/Banner.astro";
 
-const consultoriaImages = [
-  "/uploads/2019/06/BANNER1_teorias.jpg",
-  "/uploads/2019/06/BANNER2_teorias.png",
+const servicios = [
+  {
+    titulo: "Gestión y supervisión de impresión",
+    descripcion:
+      "Nos encargamos de todo el proceso de producción impresa para que el cliente no tenga que hacerlo. Evaluamos proveedores, negociamos costos, supervisamos la calidad en planta y coordinamos la entrega directamente en las oficinas del cliente. Traducimos el lenguaje técnico de la industria gráfica — tintas, sustratos, acabados, tirajes, tiempos de máquina — en decisiones simples y bien fundamentadas. El cliente recibe su producto impreso con la calidad esperada, en tiempo y sin tener que gestionar una cadena de proveedores que opera con su propia lógica y sus propios tiempos. Nosotros hacemos ese trabajo.",
+  },
+  {
+    titulo:
+      "Desarrollo de software a la medida\npara medios y proyectos institucionales",
+    descripcion:
+      "Desarrollamos sistemas digitales diseñados específicamente para las necesidades de organizaciones de medios, plataformas culturales e industrias creativas. Abarcamos el proceso completo: diseño de experiencia de usuario (UX), diseño de interfaz (UI), arquitectura de base de datos, desarrollo back-end y administración de servidores. Cultural Access es un ejemplo de plataforma que construimos de principio a fin como un sistema funcional y escalable. Porque entendemos tanto el lado editorial como el tecnológico, construimos herramientas que reflejan cómo trabajan realmente los equipos de medios y cultura — no soluciones genéricas que nunca fueron pensadas para este mundo.",
+  },
+  {
+    titulo: "Producción de contenido multiplataforma",
+    descripcion:
+      "Producimos contenido para print, digital, video, radio y podcast. Hemos desarrollado más de 1,200 ediciones de productos editoriales en distintos formatos, manteniendo estándares editoriales consistentes en cada canal. Trabajamos con los equipos para definir tono, cadencia y formato — no para llenar espacio, sino para construir audiencias que regresan.",
+  },
+  {
+    titulo: "Estrategia de distribución de medios impresos",
+    descripcion:
+      "Diseñamos modelos de distribución para llegar a las audiencias correctas a través de los canales adecuados: distribución gratuita masiva, colocación estratégica en puntos de venta, distribución digital y eventos. Vocero llegó a las 50 principales universidades de México; Residente construyó una de las audiencias más comprometidas de gastronomía y cultura en Nuevo León. Entendemos que una gran publicación que nadie lee no es una publicación — es un gasto.",
+  },
+  {
+    titulo: "Dirección editorial",
+    descripcion:
+      "Definimos la identidad editorial de una plataforma de medios: su voz, sus temas, su audiencia y su diferenciación frente a la competencia. Hemos dirigido publicaciones de arte, diseño, gastronomía, cine, cultura universitaria e industria de la construcción — siempre con una perspectiva clara sobre qué decir, a quién y por qué importa.",
+  },
+  {
+    titulo: "Producción de eventos culturales y gastronómicos",
+    descripcion:
+      "Desarrollamos eventos de gran escala que conectan audiencias con marcas y territorios culturales de forma orgánica. Desde Residente Restaurant Weekend — que movilizó a 1,000 restaurantes en Nuevo León — hasta el Riviera Maya Film Festival, creamos experiencias que extienden el alcance de una marca de medios más allá de la página o la pantalla, y hacia la vida de la ciudad.",
+  },
+  {
+    titulo: "Desarrollo de medios especializados",
+    descripcion:
+      "Construimos plataformas editoriales enfocadas en verticales específicos: artes, diseño, gastronomía, cine, construcción, cultura universitaria. Entendemos que la especialización es hoy una de las dinámicas más escasas y valiosas en la industria de medios. Ayudamos a identificar el nicho correcto, a definir sus límites y a desarrollarlo con precisión — antes de que alguien más lo haga.",
+  },
+  {
+    titulo: "Dirección creativa y diseño de publicaciones",
+    descripcion:
+      "Diseñamos la identidad visual y la arquitectura gráfica de medios impresos y digitales. Revistas, suplementos, libros-revista, periódicos y sitios web construidos a un nivel que ha merecido reconocimientos nacionales en diseño gráfico y artes gráficas. El diseño, para nosotros, no es decoración — es la primera declaración editorial que hace una publicación.",
+  },
+  {
+    titulo: "Inteligencia de negocios e investigación\nde mercado para medios",
+    descripcion:
+      "Generamos datos e indicadores que son realmente útiles para la toma de decisiones en medios. Construimos esta capacidad para el sector de alimentos y bebidas en Monterrey a través de Residente Restaurant Research, entregando inteligencia económica a líderes de la industria en los foros empresariales más importantes del estado. Aplicamos la misma metodología a otros sectores y geografías.",
+  },
+  {
+    titulo: "Consultoría estratégica para organizaciones de medios",
+    descripcion:
+      "Asesoramos a organizaciones de medios que necesitan repensar su modelo de negocio, su estructura editorial o su estrategia de crecimiento. Trabajamos desde adentro, no como observadores externos, sino con el conocimiento de operadores que han construido, dirigido y salido de empresas de medios a lo largo de más de 25 años. Hemos presentado nuestros modelos a líderes globales de la industria como Arianna Huffington, Mark Thompson y Julio Bruno.",
+  },
+  {
+    titulo: "Asesoría comercial y monetización de medios",
+    descripcion:
+      "Ayudamos a convertir audiencias en ingresos. Con más de 1,000 empresas e instituciones atendidas como clientes comerciales — entre ellas Apple, Microsoft, Rolex, Nike, Heineken, BBVA y Air France — sabemos construir el puente entre credibilidad editorial e ingresos sostenibles. Identificamos oportunidades, estructuramos propuestas comerciales y ayudamos a las organizaciones de medios a desarrollar modelos de ingresos que no comprometan su identidad editorial.",
+  },
+  {
+    titulo: "Construcción de empresas de medios",
+    descripcion:
+      "Nuestro servicio más integral. Acompañamos a fundadores e instituciones a lo largo del proceso completo de construir una empresa de medios viable — desde el concepto y la identidad editorial hasta el modelo de negocio, la estructura de ingresos y la operación. Este trabajo está fundamentado en modelos econométricos propios documentados en nuestro libro Media Company Building, desarrollados a lo largo de décadas de experiencia directa y presentados a algunas de las figuras más influyentes de la industria de medios a nivel global.",
+  },
 ];
 ---
 
@@ -14,14 +74,13 @@ const consultoriaImages = [
   title="Advisory — Mediainc"
   description="Media Inc Advisory: strategic consulting for media organizations grounded in 25+ years of operating media companies from the inside."
 >
-    <Carousel
-    images={consultoriaImages}
-    alt="Mediainc"
-    height="h-[310px]"
-    fit="cover"
-    interval={4500}
-    mobileAspect="29/10"
+
+  <Banner
+    image="/uploads/2026/documenta-consultores.png"
+    background="bg-white"
+    logoSize="180px"
   />
+
   {/* <div class="mt-6">
     <img
       src="/uploads/2019/06/Consultancy_OK_OK_Cambio.png"
@@ -30,171 +89,26 @@ const consultoriaImages = [
     />
   </div> */}
 
-  <section class="mt-20 pt-12 border-t border-white/10 font-['EB_Garamond'] font-medium">
-    <div class="flex justify-center mb-8">
-      <img
-        src="/uploads/2026/documenta-consultores.png"
-        alt="Documenta Consultores"
-        class="h-auto max-w-[400px] w-full bg-white p-4"
-      />
-    </div>
-    <h1 class="text-[25px] text-center text-white">
-      DOCUMENTA es la división de consultoría aplicada de Media Inc. Lo que
+  <section class="mt-10 pt-6 font-['EB_Garamond'] font-medium px-11 text-center">
+    <h1 class="text-[30px] md:text-[45px] leading-[1] font-bold text-center font-['EB_Garamond'] mb-12">
+      Documenta es la división de consultoría aplicada de Media Inc. Lo que
       sigue es el catálogo de servicios que ofrecemos a clientes externos.
     </h1>
 
-    <h3 class="mt-10 mb-2 text-[32px] font-semibold text-white">
-      Gestión y supervisión de impresión
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Nos encargamos de todo el proceso de producción impresa para que el
-      cliente no tenga que hacerlo. Evaluamos proveedores, negociamos costos,
-      supervisamos la calidad en planta y coordinamos la entrega directamente en
-      las oficinas del cliente. Traducimos el lenguaje técnico de la industria
-      gráfica — tintas, sustratos, acabados, tirajes, tiempos de máquina — en
-      decisiones simples y bien fundamentadas. El cliente recibe su producto
-      impreso con la calidad esperada, en tiempo y sin tener que gestionar una
-      cadena de proveedores que opera con su propia lógica y sus propios
-      tiempos. Nosotros hacemos ese trabajo.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Desarrollo de software a la medida para medios y proyectos institucionales
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Desarrollamos sistemas digitales diseñados específicamente para las
-      necesidades de organizaciones de medios, plataformas culturales e
-      industrias creativas. Abarcamos el proceso completo: diseño de
-      experiencia de usuario (UX), diseño de interfaz (UI), arquitectura de
-      base de datos, desarrollo back-end y administración de servidores.
-      Cultural Access es un ejemplo de plataforma que construimos de principio
-      a fin como un sistema funcional y escalable. Porque entendemos tanto el
-      lado editorial como el tecnológico, construimos herramientas que
-      reflejan cómo trabajan realmente los equipos de medios y cultura — no
-      soluciones genéricas que nunca fueron pensadas para este mundo.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Producción de contenido multiplataforma
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Producimos contenido para print, digital, video, radio y podcast. Hemos
-      desarrollado más de 1,200 ediciones de productos editoriales en distintos
-      formatos, manteniendo estándares editoriales consistentes en cada canal.
-      Trabajamos con los equipos para definir tono, cadencia y formato — no
-      para llenar espacio, sino para construir audiencias que regresan.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Estrategia de distribución de medios impresos
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Diseñamos modelos de distribución para llegar a las audiencias correctas
-      a través de los canales adecuados: distribución gratuita masiva,
-      colocación estratégica en puntos de venta, distribución digital y
-      eventos. Vocero llegó a las 50 principales universidades de México;
-      Residente construyó una de las audiencias más comprometidas de
-      gastronomía y cultura en Nuevo León. Entendemos que una gran publicación
-      que nadie lee no es una publicación — es un gasto.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Dirección editorial
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Definimos la identidad editorial de una plataforma de medios: su voz,
-      sus temas, su audiencia y su diferenciación frente a la competencia.
-      Hemos dirigido publicaciones de arte, diseño, gastronomía, cine, cultura
-      universitaria e industria de la construcción — siempre con una
-      perspectiva clara sobre qué decir, a quién y por qué importa.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Producción de eventos culturales y gastronómicos
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Desarrollamos eventos de gran escala que conectan audiencias con marcas
-      y territorios culturales de forma orgánica. Desde Residente Restaurant
-      Weekend — que movilizó a 1,000 restaurantes en Nuevo León — hasta el
-      Riviera Maya Film Festival, creamos experiencias que extienden el
-      alcance de una marca de medios más allá de la página o la pantalla, y
-      hacia la vida de la ciudad.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Desarrollo de medios especializados
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Construimos plataformas editoriales enfocadas en verticales específicos:
-      artes, diseño, gastronomía, cine, construcción, cultura universitaria.
-      Entendemos que la especialización es hoy una de las dinámicas más
-      escasas y valiosas en la industria de medios. Ayudamos a identificar el
-      nicho correcto, a definir sus límites y a desarrollarlo con precisión —
-      antes de que alguien más lo haga.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Dirección creativa y diseño de publicaciones
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Diseñamos la identidad visual y la arquitectura gráfica de medios
-      impresos y digitales. Revistas, suplementos, libros-revista, periódicos
-      y sitios web construidos a un nivel que ha merecido reconocimientos
-      nacionales en diseño gráfico y artes gráficas. El diseño, para nosotros,
-      no es decoración — es la primera declaración editorial que hace una
-      publicación.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Inteligencia de negocios e investigación de mercado para medios
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Generamos datos e indicadores que son realmente útiles para la toma de
-      decisiones en medios. Construimos esta capacidad para el sector de
-      alimentos y bebidas en Monterrey a través de Residente Restaurant
-      Research, entregando inteligencia económica a líderes de la industria en
-      los foros empresariales más importantes del estado. Aplicamos la misma
-      metodología a otros sectores y geografías.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Consultoría estratégica para organizaciones de medios
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Asesoramos a organizaciones de medios que necesitan repensar su modelo
-      de negocio, su estructura editorial o su estrategia de crecimiento.
-      Trabajamos desde adentro, no como observadores externos, sino con el
-      conocimiento de operadores que han construido, dirigido y salido de
-      empresas de medios a lo largo de más de 25 años. Hemos presentado
-      nuestros modelos a líderes globales de la industria como Arianna
-      Huffington, Mark Thompson y Julio Bruno.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Asesoría comercial y monetización de medios
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Ayudamos a convertir audiencias en ingresos. Con más de 1,000 empresas
-      e instituciones atendidas como clientes comerciales — entre ellas Apple,
-      Microsoft, Rolex, Nike, Heineken, BBVA y Air France — sabemos construir
-      el puente entre credibilidad editorial e ingresos sostenibles.
-      Identificamos oportunidades, estructuramos propuestas comerciales y
-      ayudamos a las organizaciones de medios a desarrollar modelos de
-      ingresos que no comprometan su identidad editorial.
-    </p>
-
-    <h3 class="mt-6 mb-2 text-[32px] font-semibold text-white">
-      Construcción de empresas de medios
-    </h3>
-    <p class="text-[25px] leading-[1.2] text-[#D4D4D4]">
-      Nuestro servicio más integral. Acompañamos a fundadores e instituciones
-      a lo largo del proceso completo de construir una empresa de medios
-      viable — desde el concepto y la identidad editorial hasta el modelo de
-      negocio, la estructura de ingresos y la operación. Este trabajo está
-      fundamentado en modelos econométricos propios documentados en nuestro
-      libro Media Company Building, desarrollados a lo largo de décadas de
-      experiencia directa y presentados a algunas de las figuras más
-      influyentes de la industria de medios a nivel global.
-    </p>
+    {servicios.map((servicio, i) => (
+      <>
+        <h3 class={`${i === 0 ? "mt-10" : "mt-6"} text-[32px] font-semibold text-white leading-[1] mb-2`}>
+          {servicio.titulo.split("\n").map((linea, j) => (
+            <>
+              {j > 0 && <br />}
+              {linea}
+            </>
+          ))}
+        </h3>
+        <p class="text-[25px] leading-[1.1] text-[#D4D4D4] pb-7">
+          {servicio.descripcion}
+        </p>
+      </>
+    ))}
   </section>
 </Layout>

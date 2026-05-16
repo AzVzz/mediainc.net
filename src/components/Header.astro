@@ -1,9 +1,9 @@
 ---
 const navLinks = [
   { line1: "Ideas", href: "/ideas" },
-  { line1: "Ventures", href: "/empresas" },
-  { line1: "Projects", href: "/proyectos-digitales" },
   { line1: "Consultancy", href: "/consultoria" },
+  { line1: "Projects", href: "/proyectos-digitales" },
+  { line1: "Ventures", href: "/empresas" },
   { line1: "Residente", href: "/residente" },
 ];
 
@@ -50,8 +50,8 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
   {
     navLinks.map(({ line1, href, dropdown }) => {
       const active = pathname === href || (dropdown && dropdown.some((d: any) => pathname === d.href));
-      const isConsultancy = line1 === "Consultancy";
-      const hasRightGap = ["Ideas", "Ventures", "Projects"].includes(line1);
+      const isProjects = line1 === "Projects";
+      const hasRightGap = ["Ideas", "Consultancy", "Ventures"].includes(line1);
       return (
         <>
           {line1 === "Residente" ? (
@@ -106,8 +106,8 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
               </a>
             </li>
           )}
-          {isConsultancy && (
-            <li class="text-[#B5B5B5] font-light select-none shrink-0 mx-2 md:mx-3">|</li>
+          {isProjects && (
+            <li class="text-[#B5B5B5] font-black select-none shrink-0 mx-2 md:mx-3">|</li>
           )}
         </>
       );
