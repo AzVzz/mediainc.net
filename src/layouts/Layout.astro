@@ -27,6 +27,16 @@ const secondaryLinks = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        if (!window.matchMedia || !matchMedia("(pointer: coarse)").matches) return;
+        var w = Math.min(window.screen.width, window.screen.height);
+        if (w >= 600 && w < 1024) {
+          var meta = document.querySelector('meta[name="viewport"]');
+          if (meta) meta.setAttribute("content", "width=1024");
+        }
+      })();
+    </script>
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="content-language" content="en" />
     <meta name="description" content={description} />
@@ -85,7 +95,7 @@ const secondaryLinks = [
         <slot />
       </main>
       <footer
-        class="mt-8 py-8 text-sm text-[#B5B5B5]"
+        class="mt-8 py-8 text-xs md:text-sm text-[#B5B5B5]"
       >
         <ul class="flex justify-center border-b pb-5 border-white/10 gap-x-4 uppercase">
           {

@@ -5,6 +5,8 @@ interface Props {
   interval?: number; // ms entre slides
   height?: string;   // tailwind arbitrary, ej. "h-[400px]"
   fit?: "contain" | "cover" | "auto";
+  autoplay?: boolean;
+  mobileAspect?: string; // ej. "16/9" — usa aspect-ratio en mobile, ignora height
 }
 
 const {
@@ -13,6 +15,8 @@ const {
   interval = 4000,
   height = "h-[400px]",
   fit = "contain",
+  autoplay = true,
+  mobileAspect,
 } = Astro.props;
 
 const objectFitClass =
@@ -25,13 +29,15 @@ const autoFit = fit === "auto";
     class={`carousel relative w-full ${height} overflow-hidden`}
     data-interval={interval}
     data-auto-fit={autoFit ? "true" : "false"}
+    data-autoplay={autoplay ? "true" : "false"}
+    style={mobileAspect ? `--carousel-mobile-aspect: ${mobileAspect};` : undefined}
   >
-    <div class="carousel-track relative w-full h-full">
+    <div class="carousel-track flex w-full h-full transition-transform duration-500 ease-out">
       {images.map((src, i) => (
         <img
           src={src}
           alt={alt}
-          class={`carousel-slide absolute inset-0 w-full h-full ${objectFitClass} transition-opacity duration-700 ease-in-out ${i === 0 ? "opacity-100" : "opacity-0"}`}
+          class={`carousel-slide w-full h-full flex-shrink-0 ${objectFitClass}`}
           data-index={i}
           loading={i === 0 ? "eager" : "lazy"}
         />
@@ -53,11 +59,13 @@ const autoFit = fit === "auto";
 
 <script>
   function initCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLElement>(".carousel-track");
     const slides = Array.from(root.querySelectorAll<HTMLImageElement>(".carousel-slide"));
     const prev = root.querySelector<HTMLButtonElement>(".carousel-prev");
     const next = root.querySelector<HTMLButtonElement>(".carousel-next");
     const interval = Number(root.dataset.interval) || 4000;
     const autoFit = root.dataset.autoFit === "true";
+    const autoplay = root.dataset.autoplay !== "false";
 
     if (autoFit) {
       const applyFit = (img: HTMLImageElement) => {
@@ -79,10 +87,7 @@ const autoFit = fit === "auto";
 
     const show = (i: number) => {
       current = (i + slides.length) % slides.length;
-      slides.forEach((s, idx) => {
-        s.classList.toggle("opacity-100", idx === current);
-        s.classList.toggle("opacity-0", idx !== current);
-      });
+      if (track) track.style.transform = `translateX(-${current * 100}%)`;
     };
 
     const start = () => {
@@ -94,13 +99,32 @@ const autoFit = fit === "auto";
       timer = undefined;
     };
 
-    prev?.addEventListener("click", () => { show(current - 1); start(); });
-    next?.addEventListener("click", () => { show(current + 1); start(); });
+    prev?.addEventListener("click", () => { show(current - 1); if (autoplay) start(); });
+    next?.addEventListener("click", () => { show(current + 1); if (autoplay) start(); });
 
-    root.addEventListener("mouseenter", stop);
-    root.addEventListener("mouseleave", start);
+    let touchStartX = 0;
+    let touchStartY = 0;
+    root.addEventListener("touchstart", (e) => {
+      const t = e.changedTouches[0];
+      touchStartX = t.screenX;
+      touchStartY = t.screenY;
+    }, { passive: true });
+    root.addEventListener("touchend", (e) => {
+      const t = e.changedTouches[0];
+      const dx = t.screenX - touchStartX;
+      const dy = t.screenY - touchStartY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) show(current + 1);
+        else show(current - 1);
+        if (autoplay) start();
+      }
+    }, { passive: true });
 
-    start();
+    if (autoplay) {
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("mouseleave", start);
+      start();
+    }
   }
 
   document.querySelectorAll<HTMLElement>(".carousel").forEach(initCarousel);

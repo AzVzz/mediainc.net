@@ -23,11 +23,23 @@ const mainBannerImages = [
   "/uploads/2015/01/LT-venecia.jpg",
 ];
 
-const cimientosImages = [
-  "/uploads/2019/06/Cimientos_web1.jpg",
-  "/uploads/2019/06/Cimientos_web1-1.jpg",
-  "/uploads/2019/06/Cimientos_web2.jpg",
-  "/uploads/2019/06/Cimientos_web3.jpg",
+const tempestadImages = [
+  "/images/Tempestad_1_int_1.jpg",
+  "/images/Tempestad_1_int_2.jpg",
+  "/images/Tempestad_1_int_3.jpg",
+  "/images/Tempestad_2_int_1.jpg",
+  "/images/Tempestad_2_int_2.jpg",
+  "/images/Tempestad_2_int_3.jpg",
+  "/images/Tempestad_3_int_2.jpg",
+  "/images/Tempestad_3_int_3.jpg",
+  "/images/Tempestad_4_int_2.jpg",
+  "/images/Tempestad_4_int_3.jpg",
+  "/images/Tempestad_5_int_3.jpg",
+  "/images/Tempestad_6_int_3.jpg",
+  "/images/Tempestad_7_int_3.jpg",
+  "/images/Tempestad_8_int_3.jpg",
+  "/images/Tempestad_9_int_3.jpg",
+  "/images/Tempestad_10_int_3.jpg",
 ];
 
 const folioImages = [
@@ -48,16 +60,6 @@ const folioImages = [
   "/images/folio_spread2.jpg",
   "/images/folio_spread1.jpg",
   "/images/folio_zoom_1.jpg",
-];
-
-const plataformaImages = [
-  "/uploads/2019/06/PLATAFORMA_rev_1_int_2.jpg",
-  "/uploads/2019/06/PLATAFORMA_rev_2_int_2.jpg",
-  "/uploads/2019/06/PLATAFORMA_rev_5_int_2.jpg",
-  "/uploads/2019/06/PLATAFORMA_rev_8_int_2.jpg",
-  "/uploads/2019/06/plt_button.jpg",
-  "/uploads/2019/06/portada_plata.jpg",
-  "/uploads/2019/06/RESIDENTE_rev_2_int_1.jpg",
 ];
 
 const voceroImages = [
@@ -85,37 +87,74 @@ const tramaImages = [
   "/images/Trama_revista_05.jpg",
 ];
 
-const tempestadImages = [
-  "/images/Tempestad_1_int_1.jpg",
-  "/images/Tempestad_1_int_2.jpg",
-  "/images/Tempestad_1_int_3.jpg",
-  "/images/Tempestad_2_int_1.jpg",
-  "/images/Tempestad_2_int_2.jpg",
-  "/images/Tempestad_2_int_3.jpg",
-  "/images/Tempestad_3_int_2.jpg",
-  "/images/Tempestad_3_int_3.jpg",
-  "/images/Tempestad_4_int_2.jpg",
-  "/images/Tempestad_4_int_3.jpg",
-  "/images/Tempestad_5_int_3.jpg",
-  "/images/Tempestad_6_int_3.jpg",
-  "/images/Tempestad_7_int_3.jpg",
-  "/images/Tempestad_8_int_3.jpg",
-  "/images/Tempestad_9_int_3.jpg",
-  "/images/Tempestad_10_int_3.jpg",
+const cimientosImages = [
+  "/uploads/2019/06/Cimientos_web1.jpg",
+  "/uploads/2019/06/Cimientos_web1-1.jpg",
+  "/uploads/2019/06/Cimientos_web2.jpg",
+  "/uploads/2019/06/Cimientos_web3.jpg",
 ];
-/*
 
-"uploads/2019/06/"
+interface Empresa {
+  titulo: string;
+  logo: string;
+  logoClass: string;
+  categoria: string;
+  descripcion: string;
+  fecha: string;
+  imagenes: string[];
+}
 
-.../03.png   cemex
-/05.png   food&drink media
-
-/LT_logow.png    la tesmestad
-/Plataforma_logow.png   residente periodico
-/vocero_logob.png   vocero
-
-*/
-
+const empresas: Empresa[] = [
+  {
+    titulo: "LA TEMPESTAD",
+    logo: "/uploads/2019/06/LT_logow.png",
+    logoClass: "h-10 w-auto mb-3 object-contain md:self-start",
+    categoria: "DIGITAL NEWS, MAGAZINE, SUPLEMENT, EDUCATION,",
+    descripcion: "LEADING ARTS MAGAZINE IN LATAM",
+    fecha: "1998 - 2017",
+    imagenes: tempestadImages,
+  },
+  {
+    titulo: "FOLIO.",
+    logo: "/images/folio_logo.png",
+    logoClass: "h-8 w-auto mb-3 object-contain md:self-start",
+    categoria: "DIGITAL NEWS, IWEEKLY NEWSPAPER, BOOK-MAGAZINE",
+    descripcion:
+      "THE FIRST OUTLET FOCUSED ON GLOBAL DESIGN AIMED AT MEXICAN READERS.",
+    fecha: "2011 - 2017",
+    imagenes: folioImages,
+  },
+  {
+    titulo: "VOCERO.",
+    logo: "/uploads/2019/06/vocero_logob.png",
+    logoClass: "h-10 w-auto mb-3 object-contain md:self-start",
+    categoria: "MAGZINE",
+    descripcion:
+      "ARTS AND CULTURE FOR STUDENTS. DISTRIBUITED FREE IN THE TOP 50 UNIVERSITIES IN MEXICO.",
+    fecha: "2006 - 2017",
+    imagenes: voceroImages,
+  },
+  {
+    titulo: "TRAMA.",
+    logo: "/images/trama_logo.png",
+    logoClass: "h-14 w-auto mb-3 object-contain md:self-start",
+    categoria: "MAGAZINE",
+    descripcion:
+      "FIRST OUTLET FOCUSED ON THE TV AND MOVIE INDUTRY FOR MEXICAN AUDIENCES",
+    fecha: "2013 - 2016",
+    imagenes: tramaImages,
+  },
+  {
+    titulo: "CIMIENTOS.",
+    logo: "/uploads/2019/06/03.png",
+    logoClass: "h-14 w-auto mb-3 object-contain md:self-start",
+    categoria: "DIGITAL NEWPAPER, PRINTED NEWPAPER.",
+    descripcion:
+      "MEDIA OUTLET FOCUSED ON THE CONSTRUCTION INDUSTRY IN ASOCIATION WITH CEMEX: NYSE: CX",
+    fecha: "2018 - 2020",
+    imagenes: cimientosImages,
+  },
+];
 ---
 
 <Layout
@@ -128,11 +167,12 @@ const tempestadImages = [
     height="h-[310px]"
     fit="cover"
     interval={4500}
+    mobileAspect="29/10"
   />
 
   <section class="py-8 flex flex-col gap-6 font-medium font-['EB_Garamond'] text-center">
     <h1 class="sr-only">Ventures</h1>
-    <p class="text-[30px] leading-[1.2] font-medium">
+    <p class="text-[22px] md:text-[30px] leading-[1.2] font-medium">
       Over the past 25 years, Media Inc has participated in founding,
       developing, and exiting companies across media, content, and
       culture-adjacent industries.
@@ -145,115 +185,38 @@ const tempestadImages = [
     </p>
   </section>
 
-  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-4/5">
-      <Carousel
-        images={cimientosImages}
-        alt="Cimientos"
-        height="h-[450px]"
-        fit="auto"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-1/5 flex flex-col justify-center self-stretch">
-      <img src="/uploads/2019/06/03.png" alt="Cimientos logo" class="w-50 h-auto object-contain"/>
-      <time
-        datetime="2018"
-        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
-        >2018 - 2020</time
-      >
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-4/5">
-      <Carousel
-        images={folioImages}
-        alt="Folio"
-        height="h-[450px]"
-        fit="auto"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-1/5 flex flex-col justify-center self-stretch">
-      <img src="/uploads/Folio-Blanco.png" alt="Cimientos logo" class="w-40 h-auto object-contain"/>
-      <time
-        datetime="2009"
-        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
-        >2009 - 2017</time
-      >
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-4/5">
-      <Carousel
-        images={tempestadImages}
-        alt="La Tempestad"
-        height="h-[450px]"
-        fit="auto"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-1/5 flex flex-col justify-center self-stretch">
-      <img src="/uploads/2019/06/LT_logow.png" alt="La Tempestad logo" class="w-full h-auto object-contain"/>
-      <time
-        datetime="1998"
-        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
-        >1998 - 2017</time
-      >
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-4/5">
-      <Carousel
-        images={voceroImages}
-        alt="Vocero"
-        height="h-[450px]"
-        fit="auto"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-1/5 flex flex-col justify-center self-stretch">
-      <img src="/uploads/2019/06/vocero_logob.png" alt="Vocero logo" class="w-full h-auto object-contain"/>
-      <time
-        datetime="2005"
-        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
-        >2005 - 2017</time
-      >
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-      </p>
-    </div>
-  </section>
-
-  <section class="mt-6 flex flex-col md:flex-row gap-6 items-start">
-    <div class="w-full md:w-4/5">
-      <Carousel
-        images={tramaImages}
-        alt="Trama"
-        height="h-[450px]"
-        fit="auto"
-        interval={4500}
-      />
-    </div>
-    <div class="md:w-1/5 flex flex-col justify-center self-stretch">
-      <h2 class="text-2xl font-bold uppercase tracking-wide text-white">
-        Trama
-      </h2>
-      <time
-        datetime="2012"
-        class="mt-1 text-[16px] leading-[1] text-[#B5B5B5] uppercase tracking-wide"
-        >2012 - 2015</time
-      >
-      <p class="mt-3 text-[#D4D4D4] leading-[1.5] tracking-wide text-[14px]">
-      </p>
-    </div>
+  <section class="py-12 flex flex-col md:gap-10">
+    {empresas.map((e) => (
+      <article class="flex flex-col md:flex-row gap-6 items-center md:items-start max-md:py-8 max-md:border-b max-md:border-white/30">
+        <div class="w-full md:w-[650px] mx-auto md:mx-0 md:flex-shrink-0">
+          <Carousel
+            images={e.imagenes}
+            alt={e.titulo}
+            height="h-[500px]"
+            fit="auto"
+            interval={4500}
+            autoplay={false}
+            mobileAspect="13/10"
+          />
+        </div>
+        <div class="md:w-1/5 flex flex-col justify-center items-center md:items-start self-stretch px-2 md:px-0">
+          <img
+            src={e.logo}
+            alt={`${e.titulo} logo`}
+            class={e.logoClass}
+            loading="lazy"
+          />
+          <span class="mt-4 text-xs text-white text-center md:text-left font-black uppercase tracking-wider">
+            {e.categoria}
+          </span>
+          <p class="mt-3 text-[#B5B5B5] text-center md:text-left leading-[1.2] text-sm md:text-base">
+            {e.descripcion}
+          </p>
+          <time class="mt-4 text-sm text-white uppercase font-bold tracking-wider">
+            {e.fecha}
+          </time>
+        </div>
+      </article>
+    ))}
   </section>
 </Layout>
