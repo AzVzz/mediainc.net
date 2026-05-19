@@ -1,11 +1,44 @@
 ---
 import Banner from "../components/Banner.astro";
 import Layout from "../layouts/Layout.astro";
+
+const siteOrigin = "https://mediainc.net";
+
+const ideasSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteOrigin}/ideas/#page`,
+    url: `${siteOrigin}/ideas/`,
+    name: "Ideas — JACH research and authorship division",
+    description:
+      "JACH is Media Inc's research and authorship division: writing and visual work examining how meaning, behavior and economic value are formed in contemporary culture.",
+    isPartOf: { "@id": `${siteOrigin}/#website` },
+    about: { "@id": `${siteOrigin}/#founder` },
+    inLanguage: "en",
+    keywords: [
+      "The Psychology of Money and Wealth",
+      "The Semantics of our Cultural Identity",
+      "Idiosyncrasy of Luck and Will",
+      "The Democratization of Pleasure",
+      "Media Gone Wrong",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteOrigin}/` },
+      { "@type": "ListItem", position: 2, name: "Ideas", item: `${siteOrigin}/ideas/` },
+    ],
+  },
+];
 ---
 
 <Layout
   title="Ideas — Mediainc"
   description="JACH, Media Inc's research and authorship division: writing and visual work that examines how meaning, behavior and economic value are formed in contemporary culture."
+  schema={ideasSchema}
 >
     <div class="bg-white">
         <Banner image="/images/jach/BANNERS_VISION2.jpg" />

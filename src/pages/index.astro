@@ -1,11 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
+
+const siteOrigin = "https://mediainc.net";
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${siteOrigin}/#webpage`,
+  url: `${siteOrigin}/`,
+  name: "Mediainc — Media Company Builder & Consultancy",
+  description:
+    "Media Inc builds, advises and operates specialized media companies. 25+ years turning audiences into revenue and ideas into businesses.",
+  isPartOf: { "@id": `${siteOrigin}/#website` },
+  about: { "@id": `${siteOrigin}/#organization` },
+  inLanguage: "en",
+  primaryImageOfPage: `${siteOrigin}/og-image.JPG`,
+};
 ---
 
 <Layout
   title="Mediainc — Media Company Builder & Consultancy"
   description="Media Inc builds, advises and operates specialized media companies. 25+ years turning audiences into revenue and ideas into businesses."
+  schema={homeSchema}
 >
   <Hero />
 </Layout>

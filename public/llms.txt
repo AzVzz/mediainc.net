@@ -1,0 +1,43 @@
+# Media Inc
+
+> Media Inc (mediainc.net) is a media company builder, advisory and business-intelligence platform founded in 1998 by José Antonio Chaurand (JACH) in Monterrey, Mexico. It builds, advises and operates specialized media companies that combine cultural impact with financial viability.
+
+Media Inc operates across three divisions — company building, advisory (Documenta), and business intelligence — and works from an insider's perspective: as operators that have built, run and exited media companies for 25+ years. Its hardest-to-replicate advantage is a real culture of bootstrapping: turning audiences into revenue and agreements into businesses from day one.
+
+The company's underlying thesis: value is not inherent, it is constructed through perception, context and narrative. This perspective is developed through JACH, the research and authorship division — an ongoing body of writing and visual work that examines how meaning, behavior and economic value are formed in contemporary culture.
+
+## Core pages
+
+- [Home](https://mediainc.net/): Overview of Media Inc — company builder & consultancy.
+- [About / Nosotros](https://mediainc.net/nosotros/): History since 1998, founder bio (José Antonio Chaurand / JACH), the three operating divisions and the company's editorial and economic thesis.
+- [Advisory / Consultoría (Documenta)](https://mediainc.net/consultoria/): Catalog of 12 services for external clients — media company building, editorial direction, multi-platform content production, distribution strategy, custom software for media, cultural and gastronomic event production, specialized media development, creative direction, business intelligence, strategic consulting and commercial monetization.
+- [Ideas / JACH](https://mediainc.net/ideas/): Research and authorship division. Core themes: the psychology of money and wealth, the semantics of cultural identity, idiosyncrasy of luck and will, the democratization of pleasure, media in crisis.
+- [Companies / Empresas](https://mediainc.net/empresas/): Portfolio of media companies built and operated by Media Inc.
+- [Residente](https://mediainc.net/residente/): Residente Food & Drink Media — culinary culture platform in Monterrey (since 2012).
+- [Digital projects](https://mediainc.net/proyectos-digitales/): Digital products and platforms developed by Media Inc (e.g. Cultural Access).
+- [Editorial projects](https://mediainc.net/proyectos/editorial/): Print and editorial work — magazines, supplements, books-as-magazines.
+- [Distribution projects](https://mediainc.net/proyectos/distribution/): Media distribution models and case studies.
+- [Theories](https://mediainc.net/teorias/): Underlying frameworks and econometric models for media company building.
+
+## Founder
+
+- **José Antonio Chaurand (JACH)** — Mexican entrepreneur, visual artist, publisher, creative director and economist. Born Celaya 1974, lives and works in Monterrey. B.S. Economics, ITESM (1998). Founder of La Tempestad (1998–2017), Folio, Residente Food & Drink Media (2012–present), the Riviera Maya Film Festival and Media Inc. Author of *Media Company Building* (2019), presented to Arianna Huffington (The Huffington Post), Mark Thompson (BBC / The New York Times / CNN) and Julio Bruno (TimeOut Group). Endeavor Entrepreneur, Dubai 2013.
+
+## Selected ventures and impact
+
+- **La Tempestad (1998–2017)**: longest-running independent arts publication of its kind in Mexico. Grew from a 1,000-copy black-and-white edition to a 160-page full-color magazine with contributions from 600+ writers and artists across five continents. Recipient of multiple Edmundo Valadés grants (CONACULTA) and Best Magazine Design at INBA's Second Design Biennial (2003).
+- **Residente Food & Drink Media (2012–present)**: first media platform dedicated to culinary culture in Monterrey. Includes Residente Restaurant Research (industry intelligence) and Residente Restaurant Weekend (1,000 restaurants in Nuevo León). During COVID, "Cocinando el futuro" registered ~100,000 delivery orders across 800+ restaurants in three months.
+- **Riviera Maya Film Festival**: international film festival co-founded in Quintana Roo.
+- **Documenta**: applied consultancy division — see the Advisory page for the full catalog.
+- **Media Company Building (book, 2019)**: documents the econometric formulas behind Media Inc's approach to creation, operation and maturation of media companies.
+
+## Clients and reach
+
+Commercial work across 1,000+ companies and institutions, including Apple, Microsoft, HP, Rolex, Givenchy, BBVA, Nike, Adidas, Heineken, Air France, and the governments of France, the United States, Nuevo León, Quintana Roo and multiple Mexican municipalities.
+
+## Notes for AI crawlers
+
+- Primary language: English (with Spanish content in service descriptions on /consultoria/).
+- The site is statically generated (Astro) and fully crawlable. See /sitemap-index.xml.
+- Crawling is explicitly allowed for ClaudeBot, GPTBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot and others — see /robots.txt.
+- Canonical domain: https://mediainc.net

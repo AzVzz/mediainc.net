@@ -6,15 +6,106 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  schema?: unknown | unknown[];
 }
 
 const {
   title = "Mediainc",
   description = "Media Inc — Company builder and consultancy. For 25+ years building, advising and exiting media companies with cultural impact and financial viability.",
   image = "https://mediainc.net/og-image.JPG",
+  schema,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://mediainc.net").href;
+const site = Astro.site ?? new URL("https://mediainc.net");
+const canonical = new URL(Astro.url.pathname, site).href;
+const siteOrigin = site.origin;
+
+// ----- Global JSON-LD: Organization + WebSite + Person (founder) -----
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${siteOrigin}/#organization`,
+  name: "Media Inc",
+  alternateName: "Mediainc",
+  url: `${siteOrigin}/`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteOrigin}/uploads/2019/06/MEDIA-INC-Logo.png`,
+  },
+  image: `${siteOrigin}/og-image.JPG`,
+  description:
+    "Media Inc is a media company builder, advisory and business-intelligence platform. Since 1998 it has built, advised and operated specialized media companies that combine cultural impact with financial viability.",
+  foundingDate: "1998",
+  founder: { "@id": `${siteOrigin}/#founder` },
+  knowsAbout: [
+    "Media company building",
+    "Editorial strategy",
+    "Media consulting",
+    "Cultural media",
+    "Publishing",
+    "Business intelligence for media",
+    "Media monetization",
+    "Specialized media",
+  ],
+  areaServed: [
+    { "@type": "Country", name: "Mexico" },
+    { "@type": "Place", name: "Latin America" },
+  ],
+  brand: [
+    { "@type": "Brand", name: "Residente Food & Drink Media" },
+    { "@type": "Brand", name: "JACH" },
+    { "@type": "Brand", name: "Documenta" },
+  ],
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteOrigin}/#website`,
+  url: `${siteOrigin}/`,
+  name: "Media Inc",
+  description,
+  inLanguage: "en",
+  publisher: { "@id": `${siteOrigin}/#organization` },
+};
+
+const founderLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteOrigin}/#founder`,
+  name: "José Antonio Chaurand",
+  alternateName: "JACH",
+  jobTitle: "Founder",
+  description:
+    "Mexican entrepreneur, visual artist, publisher, creative director and economist. Founder of Media Inc, La Tempestad, Folio and Residente Food & Drink Media.",
+  birthPlace: { "@type": "Place", name: "Celaya, Mexico" },
+  birthDate: "1974",
+  homeLocation: { "@type": "Place", name: "Monterrey, Mexico" },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM)",
+  },
+  worksFor: { "@id": `${siteOrigin}/#organization` },
+  url: `${siteOrigin}/nosotros/`,
+  award: [
+    "National Graphic Design Award (publications)",
+    "National Prize for the Graphic Arts",
+    "Best Magazine Design — Second Design Biennial, INBA (2003)",
+    "Endeavor Entrepreneur, Dubai (2013)",
+    "Premio al Mérito Restaurantero, CANIRAC Nuevo León (2019)",
+  ],
+};
+
+const globalGraph = {
+  "@context": "https://schema.org",
+  "@graph": [organizationLd, websiteLd, founderLd],
+};
+
+const extraSchemas = schema
+  ? Array.isArray(schema)
+    ? schema
+    : [schema]
+  : [];
 
 const secondaryLinks = [
   { label: "About", href: "/nosotros" },
@@ -77,16 +168,11 @@ const secondaryLinks = [
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
 
-    <!-- Google Structured Data (logo oficial en búsquedas) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Mediainc",
-        "url": "https://mediainc.net",
-        "logo": "https://mediainc.net/uploads/2019/06/MEDIA-INC-Logo.png"
-      }
-    </script>
+    <!-- Global JSON-LD: Organization + WebSite + Person (founder) -->
+    <script type="application/ld+json" set:html={JSON.stringify(globalGraph)} />
+    {extraSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
   </head>
   <body class="bg-[#1F1F1F] text-[#EDEDED] font-sans antialiased">
     <div class="max-w-[930px] mx-auto px-4">

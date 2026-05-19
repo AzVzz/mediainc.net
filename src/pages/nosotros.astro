@@ -1,11 +1,48 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Banner from "../components/Banner.astro";
+
+const siteOrigin = "https://mediainc.net";
+
+const nosotrosSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${siteOrigin}/nosotros/#about`,
+    url: `${siteOrigin}/nosotros/`,
+    name: "About — Mediainc",
+    description:
+      "Since 1998 Media Inc builds media that matters: company building, consulting and business intelligence with cultural impact and financial viability.",
+    isPartOf: { "@id": `${siteOrigin}/#website` },
+    about: { "@id": `${siteOrigin}/#organization` },
+    mainEntity: { "@id": `${siteOrigin}/#founder` },
+    inLanguage: "en",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteOrigin}/` },
+      { "@type": "ListItem", position: 2, name: "About", item: `${siteOrigin}/nosotros/` },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    name: "Media Company Building",
+    author: { "@id": `${siteOrigin}/#founder` },
+    datePublished: "2019",
+    about:
+      "Econometric formulas for the creation, operation and maturation of media companies.",
+    inLanguage: "en",
+  },
+];
 ---
 
 <Layout
   title="About — Mediainc"
   description="Since 1998 Media Inc builds media that matters: company building, consulting and business intelligence with cultural impact and financial viability."
+  schema={nosotrosSchema}
 >
   <Banner image="/uploads/2019/06/BANNERS_VISION.jpg" />
 

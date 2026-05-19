@@ -68,11 +68,54 @@ const servicios = [
       "Nuestro servicio más integral. Acompañamos a fundadores e instituciones a lo largo del proceso completo de construir una empresa de medios viable — desde el concepto y la identidad editorial hasta el modelo de negocio, la estructura de ingresos y la operación. Este trabajo está fundamentado en modelos econométricos propios documentados en nuestro libro Media Company Building, desarrollados a lo largo de décadas de experiencia directa y presentados a algunas de las figuras más influyentes de la industria de medios a nivel global.",
   },
 ];
+
+const siteOrigin = "https://mediainc.net";
+
+const consultoriaSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${siteOrigin}/consultoria/#service`,
+    name: "Documenta — Media Inc Advisory",
+    url: `${siteOrigin}/consultoria/`,
+    description:
+      "Documenta es la división de consultoría aplicada de Media Inc. Catálogo de servicios para clientes externos: company building, dirección editorial, producción de contenido, distribución, software a la medida, eventos, monetización y consultoría estratégica.",
+    parentOrganization: { "@id": `${siteOrigin}/#organization` },
+    provider: { "@id": `${siteOrigin}/#organization` },
+    areaServed: [
+      { "@type": "Country", name: "Mexico" },
+      { "@type": "Place", name: "Latin America" },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Servicios Documenta",
+      itemListElement: servicios.map((s, i) => ({
+        "@type": "Offer",
+        position: i + 1,
+        itemOffered: {
+          "@type": "Service",
+          name: s.titulo.replace(/\n/g, " "),
+          description: s.descripcion,
+          provider: { "@id": `${siteOrigin}/#organization` },
+        },
+      })),
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteOrigin}/` },
+      { "@type": "ListItem", position: 2, name: "Advisory", item: `${siteOrigin}/consultoria/` },
+    ],
+  },
+];
 ---
 
 <Layout
   title="Advisory — Mediainc"
   description="Media Inc Advisory: strategic consulting for media organizations grounded in 25+ years of operating media companies from the inside."
+  schema={consultoriaSchema}
 >
 
   <Banner
